@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print3D VN - Dịch vụ In 3D Chuyên Nghiệp</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Tùy chỉnh thêm một chút CSS nếu cần */
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-gray-50">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl mr-2 shadow-lg shadow-primary-500/30">
+                        3D
+                    </div>
+                    <span class="font-bold text-2xl tracking-tight text-gray-900">Print<span class="text-primary-600">3D</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">Trang chủ</a>
+                    <a href="#services" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">Dịch vụ</a>
+                    <a href="#about" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">Giới thiệu</a>
+                    <a href="#contact" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">Liên hệ</a>
+                    <a href="#contact" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        Bắt đầu ngay
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary-600 focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2 text-center">
+                <a href="#home" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">Trang chủ</a>
+                <a href="#services" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">Dịch vụ</a>
+                <a href="#about" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">Giới thiệu</a>
+                <a href="#contact" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">Liên hệ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+            <div class="absolute top-40 -left-40 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-40 left-20 w-96 h-96 bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-4xl mx-auto">
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 mb-8 leading-tight">
+                    Biến ý tưởng thành <span class="bg-gradient-to-r from-primary-600 to-indigo-600 gradient-text">hiện thực</span><br>với công nghệ in 3D
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Dịch vụ in 3D, thiết kế và tạo mẫu nhanh chuyên nghiệp. Chất lượng cao, độ chính xác tuyệt đối và thời gian giao hàng siêu tốc.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold text-lg transition-all shadow-lg shadow-primary-500/30 hover:shadow-xl transform hover:-translate-y-1">
+                        Báo giá ngay
+                    </a>
+                    <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-full font-semibold text-lg transition-all shadow-sm hover:shadow-md">
+                        Tìm hiểu quy trình
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dashboard Mockup Illustration -->
+            <div class="mt-20 relative mx-auto max-w-5xl">
+                <div class="rounded-2xl bg-white shadow-2xl border border-gray-100 overflow-hidden relative z-10 p-2">
+                    <div class="bg-gray-100 rounded-t-xl h-8 flex items-center px-4 space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                    </div>
+                    <div class="aspect-video bg-gray-50 relative overflow-hidden flex items-center justify-center">
+                        <!-- Abstract SVG Graphic instead of external image -->
+                        <svg class="w-full h-full opacity-20 text-primary-500 absolute inset-0" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path d="M10,90 L50,10 L90,90 Z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                            <path d="M20,80 L50,20 L80,80 Z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                            <path d="M30,70 L50,30 L70,70 Z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                            <path d="M0,50 C20,20 40,80 60,50 C80,20 100,80 100,50 L100,100 L0,100 Z" fill="currentColor" opacity="0.3"></path>
+                        </svg>
+                        <div class="text-center z-10">
+                            <i class="fas fa-cube text-6xl text-primary-500 mb-4 drop-shadow-md"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Mô phỏng máy in 3D & Sản phẩm</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-primary-600 font-semibold tracking-wide uppercase text-sm mb-2">Dịch vụ của chúng tôi</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Giải pháp toàn diện cho bạn</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100 group">
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-layer-group text-2xl text-blue-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">In 3D FDM & SLA</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        Sử dụng công nghệ in FDM cho các chi tiết lớn, chịu lực và SLA/Resin cho các mô hình tinh xảo, trang sức và nha khoa.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100 group">
+                    <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-pen-nib text-2xl text-purple-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Thiết kế 3D (CAD/CAM)</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        Chuyển đổi ý tưởng, bản vẽ 2D hoặc phác thảo của bạn thành các mô hình 3D hoàn chỉnh sẵn sàng cho việc in ấn và sản xuất.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100 group">
+                    <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-expand text-2xl text-pink-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Quét 3D (3D Scanning)</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        Số hóa các vật thể thực tế thành file 3D với độ chính xác cao, phục vụ cho việc sao chép, thiết kế ngược hoặc lưu trữ số.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 relative">
+                    <div class="absolute -top-4 -left-4 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-2xl opacity-70"></div>
+                    <div class="absolute -bottom-4 -right-4 w-72 h-72 bg-indigo-200 rounded-full mix-blend-multiply filter blur-2xl opacity-70"></div>
+                    <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80" alt="[Hình ảnh Máy in 3D]" class="relative z-10 rounded-2xl shadow-xl object-cover h-[500px] w-full" onerror="this.src='https://placehold.co/800x500/e2e8f0/475569?text=3D+Printer'">
+                    
+                    <!-- Stats badge -->
+                    <div class="absolute -bottom-8 -right-8 bg-white p-6 rounded-2xl shadow-xl z-20 flex items-center space-x-4 border border-gray-100 hidden md:flex">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+                            <i class="fas fa-check text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-gray-900">5000+</p>
+                            <p class="text-sm text-gray-500">Sản phẩm đã in</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-primary-600 font-semibold tracking-wide uppercase text-sm mb-2">Về Print3D VN</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Xưởng in 3D hiện đại & uy tín</h3>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        Với hệ thống máy in 3D tiên tiến và đa dạng vật liệu (PLA, ABS, PETG, Resin...), chúng tôi tự hào là đối tác tin cậy cho sinh viên, kỹ sư và các doanh nghiệp sản xuất trong việc tạo mẫu nhanh.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-500 mt-1 mr-3 text-lg"></i>
+                            <span class="text-gray-700">Dàn máy in công nghiệp độ phân giải cao.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-500 mt-1 mr-3 text-lg"></i>
+                            <span class="text-gray-700">Tư vấn chọn vật liệu tối ưu chi phí & công năng.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-500 mt-1 mr-3 text-lg"></i>
+                            <span class="text-gray-700">Bảo mật tuyệt đối file thiết kế của khách hàng.</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-colors">
+                        Tham quan xưởng in <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-primary-600 font-semibold tracking-wide uppercase text-sm mb-2">Liên Hệ</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Sẵn sàng bắt đầu dự án?</h3>
+                <p class="text-lg text-gray-600">Hãy để lại thông tin, đội ngũ chuyên gia của chúng tôi sẽ liên hệ lại với bạn trong vòng 24 giờ.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+                <!-- Contact Info -->
+                <div class="md:w-2/5 bg-gradient-to-br from-primary-600 to-indigo-700 p-10 text-white flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-white opacity-10 rounded-full -mr-20 -mt-20"></div>
+                    <div class="absolute bottom-0 left-0 w-40 h-40 bg-white opacity-10 rounded-full -ml-20 -mb-20"></div>
+                    
+                    <div class="relative z-10">
+                        <h4 class="text-2xl font-bold mb-6">Thông tin liên hệ</h4>
+                        <p class="mb-10 text-primary-100">Đừng ngần ngại liên hệ nếu bạn có bất kỳ câu hỏi nào về dịch vụ của chúng tôi.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-phone-alt w-8 text-xl text-primary-200"></i>
+                                <span>+84 123 456 789</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope w-8 text-xl text-primary-200"></i>
+                                <span>hello@print3d.vn</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt w-8 text-xl text-primary-200 mt-1"></i>
+                                <span>Khu Công Nghệ Cao, Quận 9<br>TP. Hồ Chí Minh, Việt Nam</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 flex space-x-4 relative z-10">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white hover:text-primary-600 flex items-center justify-center transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white hover:text-primary-600 flex items-center justify-center transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white hover:text-primary-600 flex items-center justify-center transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="md:w-3/5 p-10">
+                    <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Tin nhắn đã được gửi (Mô phỏng).');">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">Họ & Tên</label>
+                                <input type="text" id="first_name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all" placeholder="Nguyễn Văn A" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all" placeholder="email@domain.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Dịch vụ quan tâm</label>
+                            <select id="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all bg-white">
+                                <option>In 3D FDM (Nhựa thông dụng)</option>
+                                <option>In 3D Resin/SLA (Độ nét cao)</option>
+                                <option>Thiết kế tạo dáng 3D</option>
+                                <option>Quét 3D (Scan 3D)</option>
+                                <option>Khác</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Nội dung tin nhắn (Kích thước, vật liệu...)</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all resize-none" placeholder="Hãy mô tả ngắn gọn về sản phẩm bạn muốn in hoặc thiết kế..." required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gray-900 hover:bg-primary-600 text-white font-bold py-4 rounded-lg transition-colors duration-300">
+                            Gửi yêu cầu
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center mb-6">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-400 to-indigo-500 rounded-lg flex items-center justify-center text-white font-bold text-sm mr-2">
+                            3D
+                        </div>
+                        <span class="font-bold text-xl tracking-tight">Print<span class="text-primary-400">3D</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Xưởng in 3D uy tín, chuyên nghiệp. Cung cấp các giải pháp tạo mẫu nhanh, sản xuất hàng loạt vừa và nhỏ với chi phí tối ưu.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Dịch vụ</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">In 3D FDM</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">In 3D Resin SLA/DLP</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Thiết kế file 3D</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Quét mẫu 3D</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Công ty</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#about" class="hover:text-primary-400 transition-colors">Về chúng tôi</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Báo giá in 3D</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Dự án tiêu biểu</a></li>
+                        <li><a href="#contact" class="hover:text-primary-400 transition-colors">Liên hệ xưởng</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Công ty</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#about" class="hover:text-primary-400 transition-colors">Về chúng tôi</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Tuyển dụng</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Tin tức & Blog</a></li>
+                        <li><a href="#contact" class="hover:text-primary-400 transition-colors">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Nhận bản tin</h4>
+                    <p class="text-gray-400 text-sm mb-4">Cập nhật những xu hướng công nghệ mới nhất từ chúng tôi.</p>
+                    <form class="flex" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="Email của bạn" class="w-full px-4 py-2 rounded-l-lg bg-gray-800 border-none focus:outline-none focus:ring-1 focus:ring-primary-500 text-white text-sm" required>
+                        <button type="submit" class="bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-r-lg transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    &copy; 2026 Print3D VN. Tất cả quyền được bảo lưu.
+                </p>
+                <div class="flex space-x-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Chính sách bảo mật</a>
+                    <a href="#" class="hover:text-white transition-colors">Điều khoản dịch vụ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu & Navbar styling on scroll -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const icon = btn.querySelector('i');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                if (menu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+
+            // Close mobile menu when clicking a link
+            const mobileLinks = menu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+
+            // Navbar shadow on scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('shadow-sm');
+                } else {
+                    navbar.classList.remove('shadow-sm');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
