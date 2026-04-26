@@ -5,111 +5,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giahaoone - Giải Pháp In 3D Kỹ Thuật</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    
+    <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 </head>
-<body class="bg-gray-950 text-gray-200 font-sans antialiased">
+<body class="bg-gray-950 text-gray-200 font-sans antialiased min-h-screen">
 
-    <nav class="p-6 border-b border-gray-800 flex justify-between items-center bg-gray-900 sticky top-0 z-50">
-        <h1 class="text-3xl font-black tracking-tighter text-blue-500">GIAHAOONE <span class="text-sm text-gray-500 font-medium">by Tiền Lê</span></h1>
-        <div class="space-x-8 text-sm font-semibold uppercase tracking-wider">
-            <a href="#" class="hover:text-blue-400 transition-colors">Thiết kế Cơ Khí</a>
-            <a href="#" class="hover:text-blue-400 transition-colors">Chế tạo B2B</a>
-        </div>
+    <nav class="p-6 border-b border-gray-800 flex justify-between items-center bg-gray-900">
+        <h1 class="text-3xl font-black tracking-tighter text-blue-500">GIAHAOONE</h1>
     </nav>
 
     <section class="container mx-auto py-12 px-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <div class="lg:col-span-7 bg-gray-900 rounded-2xl p-6 border border-gray-800 shadow-2xl flex flex-col relative" id="drop-zone">
-            <div id="viewer-container" class="w-full h-[500px] hidden rounded-xl bg-gray-800 overflow-hidden cursor-move"></div>
+        <div class="lg:col-span-7 relative bg-gray-900 rounded-2xl border border-gray-800 shadow-2xl h-[500px] overflow-hidden">
             
-            <div id="placeholder" class="m-auto text-center border-2 border-dashed border-gray-700 p-16 rounded-xl w-full h-[500px] flex flex-col items-center justify-center">
+            <div id="viewer-container" class="absolute inset-0 z-0 cursor-move"></div>
+            
+            <div id="placeholder" class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gray-900">
                 <svg class="h-16 w-16 text-blue-500 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
                 <h3 class="text-2xl font-bold mb-2">Tải lên mô hình 3D</h3>
-                <p class="text-gray-400 mb-6">Hỗ trợ định dạng STL. Tối đa 50MB.</p>
+                <p class="text-gray-400 mb-6">Hỗ trợ định dạng STL xuất từ Creo.</p>
                 <input type="file" id="file-input" class="hidden" accept=".stl">
                 <button onclick="document.getElementById('file-input').click()" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-[0_0_15px_rgba(37,99,235,0.5)]">Chọn File Khảo Giá</button>
             </div>
 
-            <div id="loading" class="hidden absolute inset-0 bg-gray-950/90 flex flex-col items-center justify-center rounded-2xl z-40">
+            <div id="loading" class="hidden absolute inset-0 z-20 bg-gray-950/90 flex flex-col items-center justify-center">
                 <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
-                <span class="text-lg font-medium text-blue-400">Hệ thống đang nội suy lưới tam giác...</span>
+                <span class="text-lg font-medium text-blue-400">Đang dựng lưới hình học...</span>
             </div>
         </div>
 
         <div class="lg:col-span-5 bg-gray-900 rounded-2xl p-8 border border-gray-800 shadow-2xl flex flex-col">
-            <h2 class="text-2xl font-bold mb-6 text-white flex items-center gap-3">
-                <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                Phân tích & Báo giá
-            </h2>
+            <h2 class="text-2xl font-bold mb-6 text-white border-b border-gray-800 pb-4">Thông số & Báo giá</h2>
             
-            <div id="size-warning" class="hidden bg-yellow-900/40 border border-yellow-700 text-yellow-300 p-4 rounded-lg mb-6 text-sm">
-                <strong class="font-bold block text-base mb-1">⚠️ Cảnh báo khả năng chế tạo</strong>
-                Kích thước mô hình vượt qua khổ in nguyên khối tối ưu (325x325x315mm). Kỹ sư của Giahaoone sẽ hỗ trợ thiết kế ngàm âm dương để lắp ghép đảm bảo độ bền cơ học.
-            </div>
-
             <div class="space-y-6 flex-grow">
                 <div>
-                    <label class="block text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Vật liệu Kỹ thuật</label>
-                    <select id="material" class="w-full bg-gray-950 border border-gray-700 rounded-xl p-4 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all">
-                        <option value="1500" data-density="1.24">Nhựa PLA (Nguyên mẫu, Decor) - 1.500đ/g</option>
-                        <option value="2000" data-density="1.27">Nhựa PETG (Chịu lực, dẻo dai) - 2.000đ/g</option>
-                        <option value="2500" data-density="1.04">Nhựa ABS (Chịu nhiệt, kỹ thuật) - 2.500đ/g</option>
-                        <option value="4000" data-density="1.20">Nhựa PC/Nylon (Bánh răng, chi tiết máy) - 4.000đ/g</option>
+                    <label class="block text-sm font-semibold text-gray-400 mb-2">Vật liệu in</label>
+                    <select id="material" class="w-full bg-gray-950 border border-gray-700 rounded-xl p-4 text-white outline-none">
+                        <option value="1500" data-density="1.24">Nhựa PLA (1.24 g/cm³) - 1.500đ/g</option>
+                        <option value="2000" data-density="1.27">Nhựa PETG (1.27 g/cm³) - 2.000đ/g</option>
+                        <option value="2500" data-density="1.04">Nhựa ABS (1.04 g/cm³) - 2.500đ/g</option>
                     </select>
                 </div>
                 
                 <div class="grid grid-cols-2 gap-4">
                     <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
-                        <p class="text-xs text-gray-500 uppercase font-bold">Kích thước bao (X-Y-Z)</p>
-                        <p class="text-sm font-mono text-gray-300 mt-1" id="dim-display">0 x 0 x 0 mm</p>
+                        <p class="text-xs text-gray-500 uppercase font-bold">Kích thước bao (mm)</p>
+                        <p class="text-sm font-mono text-gray-300 mt-1" id="dim-display">0 x 0 x 0</p>
                     </div>
                     <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
-                        <p class="text-xs text-gray-500 uppercase font-bold">Trọng lượng vật liệu</p>
-                        <p class="text-lg font-mono text-blue-400 mt-1 font-bold" id="weight-display">0.00 g</p>
+                        <p class="text-xs text-gray-500 uppercase font-bold">Trọng lượng (g)</p>
+                        <p class="text-lg font-mono text-blue-400 mt-1 font-bold" id="weight-display">0.00</p>
                     </div>
                 </div>
 
                 <div class="mt-auto pt-6 border-t border-gray-800">
                     <div class="flex justify-between items-end mb-6">
-                        <span class="text-gray-400 font-medium">Chi phí sản xuất:</span>
+                        <span class="text-gray-400 font-medium">Chi phí dự kiến:</span>
                         <span class="text-4xl font-black text-green-400" id="price-display">0đ</span>
                     </div>
-                    <button class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-500 transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)]">
-                        Gửi File & Đặt In Zalo
-                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="container mx-auto py-16 px-6">
-        <h3 class="text-3xl font-bold mb-12 text-center text-white">Chất Lượng Chế Tạo Tại <span class="text-blue-500">Giahaoone</span></h3>
+    <script>
+        // 1. Cài đặt biến giao diện
+        const fileInput = document.getElementById('file-input');
+        const viewerContainer = document.getElementById('viewer-container');
+        const placeholder = document.getElementById('placeholder');
+        const loading = document.getElementById('loading');
+        const priceDisplay = document.getElementById('price-display');
+        const weightDisplay = document.getElementById('weight-display');
+        const dimDisplay = document.getElementById('dim-display');
+        const materialSelect = document.getElementById('material');
+
+        let currentVolumeCM3 = 0;
+        let currentMesh = null;
+
+        // 2. Khởi tạo môi trường Three.js
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, viewerContainer.clientWidth / viewerContainer.clientHeight, 0.1, 1000);
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div class="bg-gray-900 rounded-2xl p-6 border border-gray-800">
-                <h4 class="text-xl font-bold mb-4 text-gray-200">Tối ưu cấu trúc mạng tinh thể (Infill)</h4>
-                <p class="text-sm text-gray-400 mb-6">Tiết kiệm chi phí nhưng vẫn đảm bảo độ chịu lực cơ học cho các chi tiết máy.</p>
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(viewerContainer.clientWidth, viewerContainer.clientHeight);
+        viewerContainer.appendChild(renderer.domElement);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); 
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(1, 1, 1).normalize();
+        scene.add(directionalLight);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Xử lý khi màn hình bị thu phóng
+        window.addEventListener('resize', () => {
+            const width = viewerContainer.clientWidth;
+            const height = viewerContainer.clientHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
+
+        // 3. Hàm tính thể tích lưới
+        function calculateVolume(geometry) {
+            let position = geometry.attributes.position;
+            let faces = position.count / 3;
+            let sum = 0;
+            let p1 = new THREE.Vector3(), p2 = new THREE.Vector3(), p3 = new THREE.Vector3();
+            for (let i = 0; i < faces; i++) {
+                p1.fromBufferAttribute(position, i * 3 + 0);
+                p2.fromBufferAttribute(position, i * 3 + 1);
+                p3.fromBufferAttribute(position, i * 3 + 2);
+                sum += p1.dot(p2.clone().cross(p3)) / 6.0;
+            }
+            return Math.abs(sum); 
+        }
+
+        // 4. Hàm cập nhật giá
+        function updatePricing() {
+            if (currentVolumeCM3 === 0) return;
+            const selectedOption = materialSelect.options[materialSelect.selectedIndex];
+            const pricePerGram = parseInt(selectedOption.value);
+            const density = parseFloat(selectedOption.getAttribute('data-density'));
+
+            const weightGram = currentVolumeCM3 * density;
+            const totalPrice = Math.round(weightGram * pricePerGram);
+
+            weightDisplay.innerText = `${weightGram.toFixed(1)}`;
+            priceDisplay.innerText = `${totalPrice.toLocaleString('vi-VN')} đ`;
+        }
+        materialSelect.addEventListener('change', updatePricing);
+
+        // 5. Nạp file STL và Render
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            loading.classList.remove('hidden');
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const contents = event.target.result;
+                const loader = new THREE.STLLoader();
                 
-                <div class="slider-container" id="infill-slider">
-                    <img src="https://via.placeholder.com/600x300/333333/888888?text=Anh+Infill+Ben+Trong" class="slider-img" alt="Infill">
-                    <img src="https://via.placeholder.com/600x300/111111/555555?text=Anh+Hoan+Thien+Bong+Bay" class="slider-img slider-img-top" id="slider-top-img" alt="Solid">
-                    <div class="slider-handle" id="slider-handle"></div>
-                </div>
-            </div>
+                try {
+                    const geometry = loader.parse(contents);
+                    
+                    // Tính toán thông số
+                    currentVolumeCM3 = calculateVolume(geometry) / 1000;
+                    geometry.computeBoundingBox();
+                    const box = geometry.boundingBox;
+                    dimDisplay.innerText = `${Math.abs(box.max.x - box.min.x).toFixed(1)} x ${Math.abs(box.max.y - box.min.y).toFixed(1)} x ${Math.abs(box.max.z - box.min.z).toFixed(1)}`;
+                    
+                    updatePricing();
 
-            <div class="bg-gray-900 rounded-2xl p-6 border border-gray-800 flex flex-col justify-center items-center text-center">
-                <svg class="w-16 h-16 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                <h4 class="text-xl font-bold mb-2 text-gray-200">Thiết Kế Cụm Lắp Ráp Phức Tạp</h4>
-                <p class="text-sm text-gray-400 mb-6 px-8">Từ hộp giảm tốc bánh răng hành tinh đến hệ thống truyền động xe Robot. Dung sai in đạt chuẩn lắp ghép gắt gao.</p>
-                <div class="w-full h-48 bg-gray-800 rounded-xl flex items-center justify-center border-2 border-dashed border-gray-700">
-                    <span class="text-gray-500">[Nơi chèn Video/Ảnh động Exploded View]</span>
-                </div>
-            </div>
-        </div>
-    </section>
+                    // Vẽ 3D
+                    if (currentMesh) scene.remove(currentMesh);
+                    
+                    const material = new THREE.MeshStandardMaterial({ color: 0x3b82f6, roughness: 0.5 });
+                    currentMesh = new THREE.Mesh(geometry, material);
+                    
+                    geometry.center();
+                    scene.add(currentMesh);
 
-    <script src="script.js"></script>
+                    geometry.computeBoundingSphere();
+                    camera.position.z = geometry.boundingSphere.radius * 2.5;
+
+                    // Ẩn bảng chờ đi để lộ khung 3D bên dưới
+                    placeholder.classList.add('hidden');
+
+                } catch (error) {
+                    console.error("Chi tiết lỗi:", error);
+                    alert("Có lỗi xảy ra khi đọc file STL. Vui lòng thử một file khác.");
+                } finally {
+                    loading.classList.add('hidden');
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        });
+    </script>
 </body>
 </html>
