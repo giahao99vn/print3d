@@ -295,8 +295,13 @@
                             <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mb-1">Dự toán chi phí</div>
                             <div class="text-3xl font-black text-emerald-400 tracking-tight" id="price-display">0đ</div>
                             
+                            <div id="customer-info" class="mt-4 hidden space-y-3">
+                                <input type="text" id="cust-name" placeholder="Tên của bạn..." class="w-full bg-slate-900 border border-slate-700 p-3 rounded-lg text-sm text-white outline-none focus:border-brand-500 transition">
+                                <input type="tel" id="cust-phone" placeholder="Số điện thoại (Zalo)..." class="w-full bg-slate-900 border border-slate-700 p-3 rounded-lg text-sm text-white outline-none focus:border-brand-500 transition">
+                            </div>
+
                             <button id="btn-zalo-3d" class="w-full mt-4 bg-gradient-to-r from-viet-gold to-yellow-600 hover:from-yellow-500 hover:to-yellow-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg shadow-yellow-600/20 flex items-center justify-center gap-2 hidden group">
-                                <i class="fa-solid fa-paper-plane group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i> Gửi Yêu Cầu Zalo
+                                <i class="fa-solid fa-paper-plane group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i> Lưu Đơn & Mở Zalo
                             </button>
                         </div>
                     </div>
@@ -903,7 +908,53 @@
             const layerName = layerHeight.options[layerHeight.selectedIndex].text.split(' (')[0];
             
             const zaloMessage = `[ĐẶT IN 3D WEB]\nChào Giahaoone, tôi muốn in mẫu này:\n- Vật liệu: ${matName}\n- Màu sắc: ${colorName}\n- Độ đặc (Infill): ${infill}%\n- Độ mịn: ${layerName}\n- Kích thước: ${dims}\n- Khối lượng ước tính: ${weight.toFixed(1)}g\n- Báo giá dự kiến: ${finalPrice.toLocaleString('vi-VN')} VNĐ\n(Tôi sẽ gửi kèm file STL ngay sau tin nhắn này!)`;
-            btnZalo3D.onclick = () => window.open(`https://zalo.me/0704141237?text=${encodeURIComponent(zaloMessage)}`, '_blank');
+            // === ĐOẠN CODE CŨ: ===
+            // btnZalo3D.onclick = () => window.open(`https://zalo.me/0704141237?text=${encodeURIComponent(zaloMessage)}`, '_blank');
+            
+            // === THAY BẰNG ĐOẠN CODE MỚI NÀY: ===
+            
+            // Hiện khung nhập thông tin khi có giá
+            document.getElementById('customer-info').classList.remove('hidden');
+            
+            btnZalo3D.onclick = () => {
+                const custName = document.getElementById('cust-name').value || "Chưa cung cấp";
+                const custPhone = document.getElementById('cust-phone').value || "Chưa cung cấp";
+
+                // Đổi chữ trên nút để khách biết đang xử lý
+                const originalBtnText = btnZalo3D.innerHTML;
+                btnZalo3D.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang xử lý...';
+                
+                // Chuẩn bị gói dữ liệu gửi lên Google Sheets
+                const formData = new URLSearchParams();
+                formData.append('name', custName);
+                formData.append('phone', custPhone);
+                formData.append('material', matName);
+                formData.append('color', colorName);
+                formData.append('dims', dims);
+                formData.append('weight', weight.toFixed(1) + "g");
+                formData.append('config', `Infill ${infill}% | Layer ${layerName}`);
+                formData.append('price', finalPrice.toLocaleString('vi-VN') + " đ");
+
+                // Bắn dữ liệu lên Google Sheets (Web App URL của bạn)
+                const GOOGLE_APP_URL = "https://script.google.com/macros/s/AKfycbzTq4LssG-Ox4pJwg6ek0fUSpKPSwcYw7SoO5D-z3r75_rw2bRJAcAadkv6kpHyojIp/exec"; 
+                
+                fetch(GOOGLE_APP_URL, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    // Mở Zalo sau khi đã lưu thành công
+                    btnZalo3D.innerHTML = originalBtnText;
+                    window.open(`https://zalo.me/0704141237?text=${encodeURIComponent(zaloMessage)}`, '_blank');
+                })
+                .catch(error => {
+                    console.error('Lỗi lưu sheet:', error);
+                    // Lỗi rớt mạng vẫn cho khách mở Zalo để không rớt khách
+                    btnZalo3D.innerHTML = originalBtnText;
+                    window.open(`https://zalo.me/0704141237?text=${encodeURIComponent(zaloMessage)}`, '_blank');
+                });
+            };
         };
 
         materialSelect.addEventListener('change', updatePricing3D); layerHeight.addEventListener('change', updatePricing3D);
