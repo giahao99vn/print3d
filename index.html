@@ -159,6 +159,34 @@
         </div>
     </section>
 
+    <section id="portfolio-exploded" class="py-24 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-viet-gold font-bold tracking-wider uppercase text-sm mb-2 block">Mô phỏng & Thiết kế (DfAM)</span>
+                <h2 class="text-3xl md:text-4xl font-black mb-4 tracking-tight text-slate-900">Trình Diễn Phân Rã Cơ Khí (Exploded View)</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Kiểm soát chuẩn xác dung sai lắp ghép và mô phỏng cơ cấu truyền động trước khi đưa vào sản xuất thực tế bằng máy in công nghiệp.</p>
+            </div>
+
+            <div class="max-w-5xl mx-auto bg-slate-900 rounded-3xl p-2 shadow-2xl border border-slate-800 relative group overflow-hidden">
+                <div class="absolute top-6 left-6 z-10 bg-black/60 backdrop-blur-md px-4 py-3 rounded-xl border border-slate-700 shadow-lg pointer-events-none">
+                    <h4 class="text-white font-black text-lg flex items-center gap-2"><i class="fa-solid fa-cogs text-viet-gold"></i> Cụm Hộp Số Hành Tinh</h4>
+                    <p class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Planetary Gearbox Assembly</p>
+                </div>
+                
+                <div id="exploded-container" class="w-full h-[450px] md:h-[550px] rounded-2xl overflow-hidden cursor-move bg-slate-950"></div>
+                
+                <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-slate-800/90 backdrop-blur-md px-6 py-4 rounded-2xl border border-slate-600 shadow-[0_0_30px_rgba(0,0,0,0.5)] w-[85%] max-w-md flex items-center gap-4 z-10 transition-transform group-hover:-translate-y-2">
+                    <i class="fa-solid fa-compress text-slate-400 text-lg"></i>
+                    <div class="flex-1 relative">
+                        <label class="absolute -top-6 left-1/2 transform -translate-x-1/2 text-[10px] font-bold text-viet-gold uppercase tracking-widest text-nowrap">Kéo để phân rã chi tiết</label>
+                        <input type="range" id="explode-slider" min="0" max="100" value="0" class="w-full appearance-none bg-slate-950 h-2 rounded-full outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand-500 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-[0_0_10px_rgba(14,165,233,0.8)]">
+                    </div>
+                    <i class="fa-solid fa-expand text-brand-500 text-lg animate-pulse"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <section id="auto-calc" class="py-24 bg-slate-950 text-white relative">
         <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 50% 50%, #D4AF37 2px, transparent 2px); background-size: 40px 40px;"></div>
         <div class="container mx-auto px-6 relative z-10">
@@ -1036,6 +1064,133 @@
         // --- 5. NÚT SCROLL TO TOP ---
         window.addEventListener('scroll', () => { if (window.scrollY > 400) { backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4'); } else { backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4'); } });
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        // ==========================================
+        // BƯỚC 1: LOGIC EXPLODED VIEW (HỘP SỐ HÀNH TINH)
+        // ==========================================
+        const exContainer = document.getElementById('exploded-container');
+        const exSlider = document.getElementById('explode-slider');
+        
+        if(exContainer) {
+            const exScene = new THREE.Scene();
+            const exCamera = new THREE.PerspectiveCamera(45, exContainer.clientWidth / exContainer.clientHeight, 0.1, 1000);
+            const exRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            exRenderer.setSize(exContainer.clientWidth, exContainer.clientHeight);
+            exRenderer.outputEncoding = THREE.sRGBEncoding;
+            exRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+            exContainer.appendChild(exRenderer.domElement);
+            
+            const exEnv = new THREE.PMREMGenerator(exRenderer);
+            exScene.environment = exEnv.fromScene(new THREE.RoomEnvironment(), 0.04).texture;
+            const exLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            exLight.position.set(50, 50, 50);
+            exScene.add(exLight);
+
+            const exControls = new THREE.OrbitControls(exCamera, exRenderer.domElement);
+            exControls.enableDamping = true;
+            exCamera.position.set(0, -70, 80); // Góc nhìn chéo từ trên xuống
+
+            // Hàm tạo bánh răng tùy chỉnh
+            function createCustomGear(teeth, outerR, innerR, depth, hasHole = true) {
+                const shape = new THREE.Shape();
+                for (let i = 0; i < teeth * 2; i++) {
+                    const r = i % 2 === 0 ? outerR : innerR;
+                    const a = (i / (teeth * 2)) * Math.PI * 2;
+                    if (i === 0) shape.moveTo(Math.cos(a) * r, Math.sin(a) * r);
+                    else shape.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+                }
+                shape.closePath();
+                if(hasHole) {
+                    const hole = new THREE.Path();
+                    hole.absarc(0, 0, 4, 0, Math.PI * 2, false);
+                    shape.holes.push(hole);
+                }
+                const geo = new THREE.ExtrudeGeometry(shape, { depth: depth, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 0.5, bevelThickness: 0.5 });
+                geo.center(); return geo;
+            }
+
+            const exParts = [];
+            const gearGroup = new THREE.Group();
+            exScene.add(gearGroup);
+
+            // 1. Sun Gear (Bánh răng mặt trời - Trung tâm)
+            const sunMat = new THREE.MeshStandardMaterial({ color: 0xdc2626, metalness: 0.7, roughness: 0.2 });
+            const sunGear = new THREE.Mesh(createCustomGear(12, 12, 9, 8), sunMat);
+            gearGroup.add(sunGear);
+            exParts.push({ mesh: sunGear, basePos: new THREE.Vector3(0,0,0), dir: new THREE.Vector3(0,0,1), maxDist: 40 });
+
+            // 2. Planet Gears (3 Bánh răng hành tinh)
+            const planetMat = new THREE.MeshStandardMaterial({ color: 0x0ea5e9, metalness: 0.6, roughness: 0.3 });
+            const planets = [];
+            for(let i=0; i<3; i++) {
+                const angle = (i / 3) * Math.PI * 2;
+                const pGear = new THREE.Mesh(createCustomGear(12, 12, 9, 8), planetMat);
+                const px = Math.cos(angle) * 22;
+                const py = Math.sin(angle) * 22;
+                pGear.position.set(px, py, 0);
+                gearGroup.add(pGear);
+                planets.push(pGear);
+                // Nổ tỏa ra xung quanh theo mặt phẳng XY
+                exParts.push({ mesh: pGear, basePos: new THREE.Vector3(px, py, 0), dir: new THREE.Vector3(Math.cos(angle), Math.sin(angle), 0).normalize(), maxDist: 35 });
+            }
+
+            // 3. Ring Gear (Vành răng ngoài)
+            const ringShape = new THREE.Shape();
+            ringShape.absarc(0, 0, 42, 0, Math.PI * 2, false);
+            const ringHole = new THREE.Path();
+            const rTeeth = 36;
+            for (let i = 0; i < rTeeth * 2; i++) {
+                const r = i % 2 === 0 ? 34 : 37;
+                const a = (i / (rTeeth * 2)) * Math.PI * 2;
+                if (i === 0) ringHole.moveTo(Math.cos(a) * r, Math.sin(a) * r);
+                else ringHole.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+            }
+            ringShape.holes.push(ringHole);
+            const ringGeo = new THREE.ExtrudeGeometry(ringShape, { depth: 10, bevelEnabled: true, bevelSize: 0.5, bevelThickness: 0.5 });
+            ringGeo.center();
+            const ringMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.8, roughness: 0.4 });
+            const ringGear = new THREE.Mesh(ringGeo, ringMat);
+            gearGroup.add(ringGear);
+            exParts.push({ mesh: ringGear, basePos: new THREE.Vector3(0,0,0), dir: new THREE.Vector3(0,0,-1), maxDist: 30 });
+
+            // 4. Trục dẫn động (Shaft)
+            const shaftGeo = new THREE.CylinderGeometry(3.8, 3.8, 40, 32);
+            shaftGeo.rotateX(Math.PI/2);
+            const shaftMat = new THREE.MeshStandardMaterial({ color: 0xD4AF37, metalness: 0.9, roughness: 0.1 });
+            const shaft = new THREE.Mesh(shaftGeo, shaftMat);
+            gearGroup.add(shaft);
+            exParts.push({ mesh: shaft, basePos: new THREE.Vector3(0,0,0), dir: new THREE.Vector3(0,0,1), maxDist: 70 });
+
+            // Điều khiển Explode bằng Slider
+            exSlider.addEventListener('input', (e) => {
+                const val = e.target.value / 100;
+                exParts.forEach(p => {
+                    p.mesh.position.copy(p.basePos).add(p.dir.clone().multiplyScalar(val * p.maxDist));
+                });
+            });
+
+            // Animation chuyển động quay ăn khớp
+            function animateExploded() {
+                requestAnimationFrame(animateExploded);
+                exControls.update();
+                exRenderer.render(exScene, exCamera);
+                
+                // Khi cụm đang lắp ghép (chưa nổ), cho các bánh răng chạy để phô diễn
+                if(exSlider.value < 5) {
+                    sunGear.rotation.z += 0.02;
+                    planets.forEach(p => p.rotation.z -= 0.02); // Bánh răng hành tinh quay ngược chiều
+                    shaft.rotation.z += 0.02;
+                }
+            }
+            animateExploded();
+
+            // Xử lý Resize
+            window.addEventListener('resize', () => {
+                exCamera.aspect = exContainer.clientWidth / exContainer.clientHeight;
+                exCamera.updateProjectionMatrix();
+                exRenderer.setSize(exContainer.clientWidth, exContainer.clientHeight);
+            });
+        }
+        // ==========================================
     </script>
 </body>
 </html>
