@@ -10,7 +10,6 @@
     <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
     <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://unpkg.com/three@0.128.0/examples/js/environments/RoomEnvironment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -36,7 +35,7 @@
     </script>
 
     <style>
-        body { scroll-behavior: smooth; background-color: #f8fafc; }
+        body { scroll-behavior: smooth; background-color: #f8fafc; overflow-x: hidden; }
         
         .trong-dong-bg {
             background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(14, 165, 233, 0.05)" stroke-width="2" stroke-dasharray="4 4"/><circle cx="50" cy="50" r="30" fill="none" stroke="rgba(212, 175, 55, 0.05)" stroke-width="1"/><polygon points="50,15 55,45 85,50 55,55 50,85 45,55 15,50 45,45" fill="rgba(14, 165, 233, 0.03)"/></svg>');
@@ -191,7 +190,7 @@
                             <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-3"><i class="fa-solid fa-wand-magic-sparkles text-viet-gold"></i> Hoặc trải nghiệm bằng file mẫu:</p>
                             <div class="flex gap-3 justify-center">
                                 <button onclick="loadDemoModel('gear')" class="px-4 py-2 bg-slate-800 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all border border-slate-700 hover:border-brand-400 shadow"><i class="fa-solid fa-gear mr-1"></i> Bánh Răng</button>
-                                <button onclick="loadDemoModel('box')" class="px-4 py-2 bg-slate-800 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all border border-slate-700 hover:border-brand-400 shadow"><i class="fa-solid fa-cube mr-1"></i> Hộp Mạch</button>
+                                <button onclick="loadDemoModel('box')" class="px-4 py-2 bg-slate-800 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all border border-slate-700 hover:border-brand-400 shadow"><i class="fa-solid fa-microchip mr-1"></i> Viền Mạch</button>
                                 <button onclick="loadDemoModel('knot')" class="px-4 py-2 bg-slate-800 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all border border-slate-700 hover:border-brand-400 shadow"><i class="fa-solid fa-dharmachakra mr-1"></i> Trụ Xoắn</button>
                             </div>
                         </div>
@@ -271,10 +270,6 @@
                             <button id="btn-zalo-3d" class="w-full mt-4 bg-gradient-to-r from-viet-gold to-yellow-600 hover:from-yellow-500 hover:to-yellow-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg shadow-yellow-600/20 flex items-center justify-center gap-2 hidden group">
                                 <i class="fa-solid fa-paper-plane group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i> Gửi Yêu Cầu Zalo
                             </button>
-                            
-                            <button id="btn-pdf-3d" class="w-full mt-3 bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-4 rounded-xl transition-all border border-slate-600 flex items-center justify-center gap-2 hidden">
-                                <i class="fa-solid fa-file-pdf text-red-400"></i> Tải Báo Giá (PDF)
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -296,18 +291,22 @@
                         <div class="space-y-10">
                             <div>
                                 <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 block italic">1. Lựa chọn vật liệu</h3>
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                    <button onclick="setMaterialManual('petg')" id="btn-petg" class="mat-btn active-material bg-brand-50/50 p-5 rounded-xl border border-brand-500 text-left transition-all hover:shadow-md">
+                                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                    <button onclick="setMaterialManual('petg')" id="btn-petg" class="mat-btn active-material bg-brand-50/50 p-4 rounded-xl border border-brand-500 text-left transition-all hover:shadow-md">
                                         <div class="font-bold text-slate-900">PETG</div>
                                         <div class="text-[10px] text-slate-500 mt-1 uppercase">Đa dụng & Bền hơn PLA</div>
                                     </button>
-                                    <button onclick="setMaterialManual('pla')" id="btn-pla" class="mat-btn p-5 rounded-xl border border-slate-200 text-left transition-all hover:shadow-md">
+                                    <button onclick="setMaterialManual('pla')" id="btn-pla" class="mat-btn p-4 rounded-xl border border-slate-200 text-left transition-all hover:shadow-md">
                                         <div class="font-bold text-slate-900">PLA</div>
-                                        <div class="text-[10px] text-slate-500 mt-1 uppercase">Tính thẩm mỹ cao và có thể sơn phủ rất dễ</div>
+                                        <div class="text-[10px] text-slate-500 mt-1 uppercase">Thẩm mỹ & Sơn phủ dễ</div>
                                     </button>
-                                    <button onclick="setMaterialManual('abs')" id="btn-abs" class="mat-btn p-5 rounded-xl border border-slate-200 text-left transition-all hover:shadow-md">
+                                    <button onclick="setMaterialManual('abs')" id="btn-abs" class="mat-btn p-4 rounded-xl border border-slate-200 text-left transition-all hover:shadow-md">
                                         <div class="font-bold text-slate-900">ABS/ASA</div>
-                                        <div class="text-[10px] text-slate-500 mt-1 uppercase">Vật liệu Kỹ Thuật với cơ tính tốt</div>
+                                        <div class="text-[10px] text-slate-500 mt-1 uppercase">Nhựa Kỹ Thuật chịu nhiệt</div>
+                                    </button>
+                                    <button onclick="setMaterialManual('carbon')" id="btn-carbon" class="mat-btn p-4 rounded-xl border border-slate-200 text-left transition-all hover:shadow-md bg-slate-50">
+                                        <div class="font-bold text-slate-900">Carbon</div>
+                                        <div class="text-[10px] text-slate-500 mt-1 uppercase">Chịu lực siêu tốt</div>
                                     </button>
                                 </div>
                                 <input type="hidden" id="calc-material" value="petg">
@@ -690,7 +689,7 @@
     </div>
      
     <script>
-        // --- 1. SETUP AUDIO (ĐÃ SỬA LỖI PHÁT NHẠC) ---
+        // --- 1. SETUP AUDIO (ĐÃ SỬA LỖI PHÁT NHẠC VÀ ĐỒNG BỘ NÚT BẤM) ---
         const bgMusic = document.getElementById('bgMusic');
         const audioBtn = document.getElementById('audio-btn');
         bgMusic.volume = 0.5;
@@ -700,7 +699,7 @@
                 bgMusic.play().then(() => {
                     audioBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
                     audioBtn.classList.add('animate-pulse', 'text-viet-gold', 'shadow-[0_0_20px_rgba(212,175,55,0.6)]');
-                }).catch(e => alert("Trình duyệt chặn phát nhạc tự động. Hãy thử lại."));
+                }).catch(e => alert("Trình duyệt chặn phát nhạc tự động. Vui lòng tương tác với trang web trước."));
             } else {
                 bgMusic.pause();
                 audioBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
@@ -766,8 +765,13 @@
         function openGame() { createBoard(); gameModal.classList.remove('hidden'); setTimeout(() => gameModal.classList.remove('opacity-0'), 10); }
         function closeGame() { gameModal.classList.add('opacity-0'); setTimeout(() => gameModal.classList.add('hidden'), 300); }
 
-        // --- 3. BẢNG TÍNH GIÁ NHANH THEO GRAM ---
-        const pricingManual = { petg: { under: 1000, over: 600 }, pla: { under: 1100, over: 700 }, abs: { under: 1200, over: 800 } };
+        // --- 3. BẢNG TÍNH GIÁ NHANH THEO GRAM (ĐÃ BỔ SUNG CARBON FIBER) ---
+        const pricingManual = { 
+            petg: { under: 1000, over: 600 }, 
+            pla: { under: 1100, over: 700 }, 
+            abs: { under: 1200, over: 800 },
+            carbon: { under: 2000, over: 1500 } // Thêm giá Carbon Fiber
+        };
         const MIN_PRICE = 20000;
         const CTV_PASSWORD = "giahao"; 
 
@@ -819,7 +823,7 @@
         [weightInputManual, passwordInputManual].forEach(el => el.addEventListener('input', calculateManualPrice));
 
         // --- 4. HỆ THỐNG PHÂN TÍCH 3D TỰ ĐỘNG ---
-        const fileInput = document.getElementById('file-input'), viewerContainer = document.getElementById('viewer-container'), placeholder = document.getElementById('placeholder'), loading = document.getElementById('loading'), materialSelect = document.getElementById('material'), resetViewerBtn = document.getElementById('reset-viewer-btn'), infillSlider = document.getElementById('infill-slider'), layerHeight = document.getElementById('layer-height'), sizeWarning = document.getElementById('size-warning'), btnZalo3D = document.getElementById('btn-zalo-3d'), btnPdf3D = document.getElementById('btn-pdf-3d');
+        const fileInput = document.getElementById('file-input'), viewerContainer = document.getElementById('viewer-container'), placeholder = document.getElementById('placeholder'), loading = document.getElementById('loading'), materialSelect = document.getElementById('material'), resetViewerBtn = document.getElementById('reset-viewer-btn'), infillSlider = document.getElementById('infill-slider'), layerHeight = document.getElementById('layer-height'), sizeWarning = document.getElementById('size-warning'), btnZalo3D = document.getElementById('btn-zalo-3d');
         let currentVolumeCM3 = 0, currentMesh = null;
 
         const scene = new THREE.Scene();
@@ -907,13 +911,10 @@
             reader.readAsArrayBuffer(file);
         });
 
-        // --- ĐÃ SỬA: VẼ BÁNH RĂNG CHUẨN KỸ THUẬT THAY VÌ BÁNH DONUT ---
+        // --- VẼ BÁNH RĂNG KỸ THUẬT ---
         function createGearGeometry() {
             const shape = new THREE.Shape();
-            const teeth = 16;
-            const outerRadius = 25;
-            const innerRadius = 20;
-            
+            const teeth = 16, outerRadius = 30, innerRadius = 24;
             for (let i = 0; i < teeth * 2; i++) {
                 const r = i % 2 === 0 ? outerRadius : innerRadius;
                 const a = (i / (teeth * 2)) * Math.PI * 2;
@@ -921,15 +922,59 @@
                 else shape.lineTo(Math.cos(a) * r, Math.sin(a) * r);
             }
             shape.closePath();
-            
             const holePath = new THREE.Path();
-            holePath.absarc(0, 0, 8, 0, Math.PI * 2, false);
+            holePath.absarc(0, 0, 10, 0, Math.PI * 2, false);
             shape.holes.push(holePath);
-
-            const extrudeSettings = { depth: 8, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 0.5, bevelThickness: 0.5 };
+            const extrudeSettings = { depth: 10, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 0.5, bevelThickness: 0.5 };
             const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-            geo.center();
-            return geo;
+            geo.center(); return geo;
+        }
+
+        // --- VẼ KHUNG VIỀN MẠCH PCB (ĐÃ SỬA THÀNH KHUNG THỰC TẾ) ---
+        function createCircuitBoxGeometry() {
+            const shape = new THREE.Shape();
+            const w = 60, h = 40, r = 4;
+            const x = -w/2, y = -h/2;
+            
+            // Vẽ viền ngoài hình chữ nhật bo góc
+            shape.moveTo(x, y + r);
+            shape.lineTo(x, y + h - r);
+            shape.quadraticCurveTo(x, y + h, x + r, y + h);
+            shape.lineTo(x + w - r, y + h);
+            shape.quadraticCurveTo(x + w, y + h, x + w, y + h - r);
+            shape.lineTo(x + w, y + r);
+            shape.quadraticCurveTo(x + w, y, x + w - r, y);
+            shape.lineTo(x + r, y);
+            shape.quadraticCurveTo(x, y, x, y + r);
+
+            // Cắt rỗng ở giữa để đặt mạch
+            const hole = new THREE.Path();
+            const hw = 50, hh = 30, hr = 2;
+            const hx = -hw/2, hy = -hh/2;
+            hole.moveTo(hx, hy + hr);
+            hole.lineTo(hx, hy + hh - hr);
+            hole.quadraticCurveTo(hx, hy + hh, hx + hr, hy + hh);
+            hole.lineTo(hx + hw - hr, hy + hh);
+            hole.quadraticCurveTo(hx + hw, hy + hh, hx + hw, hy + hh - hr);
+            hole.lineTo(hx + hw, hy + hr);
+            hole.quadraticCurveTo(hx + hw, hy, hx + hw - hr, hy);
+            hole.lineTo(hx + hr, hy);
+            hole.quadraticCurveTo(hx, hy, hx, hy + hr);
+            shape.holes.push(hole);
+
+            // Thêm 4 lỗ bắt ốc ở 4 góc
+            const screwR = 1.5;
+            const pos = [[-25, -15], [25, -15], [25, 15], [-25, 15]];
+            pos.forEach(p => {
+                const screwHole = new THREE.Path();
+                screwHole.absarc(p[0], p[1], screwR, 0, Math.PI * 2, false);
+                shape.holes.push(screwHole);
+            });
+
+            // Đùn 3D thành khung viền dày 15mm
+            const extrudeSettings = { depth: 15, bevelEnabled: true, bevelSegments: 3, steps: 1, bevelSize: 0.5, bevelThickness: 0.5 };
+            const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+            geo.center(); return geo;
         }
 
         // XỬ LÝ DEMO MODELS
@@ -938,7 +983,7 @@
             setTimeout(() => {
                 let geometry;
                 if (type === 'gear') { geometry = createGearGeometry(); } 
-                else if (type === 'box') { geometry = new THREE.BoxGeometry(60, 40, 20); } 
+                else if (type === 'box') { geometry = createCircuitBoxGeometry(); } // Gọi hàm vẽ mạch mới
                 else { geometry = new THREE.TorusKnotGeometry(25, 6, 100, 16); }
                 
                 setup3DModel(geometry);
@@ -947,7 +992,7 @@
 
         function setup3DModel(geometry) {
             currentVolumeCM3 = calculateVolume(geometry) / 1000;
-            if(currentVolumeCM3 === 0) currentVolumeCM3 = 25; // fallback for non-indexed custom geo
+            if(currentVolumeCM3 === 0) currentVolumeCM3 = 35; // Giá trị fallback cho khối extrude custom
             
             geometry.computeBoundingBox(); 
             const box = geometry.boundingBox;
@@ -969,7 +1014,7 @@
             placeholder.classList.add('opacity-0', 'pointer-events-none');
             document.getElementById('demo-models').classList.add('hidden');
             resetViewerBtn.classList.remove('hidden'); resetViewerBtn.classList.add('flex');
-            btnZalo3D.classList.remove('hidden'); btnPdf3D.classList.remove('hidden');
+            btnZalo3D.classList.remove('hidden');
             
             updatePricing3D(); loading.classList.add('hidden');
         }
@@ -985,61 +1030,10 @@
             placeholder.classList.remove('opacity-0', 'pointer-events-none');
             document.getElementById('demo-models').classList.remove('hidden');
             resetViewerBtn.classList.add('hidden'); resetViewerBtn.classList.remove('flex');
-            btnZalo3D.classList.add('hidden'); btnPdf3D.classList.add('hidden'); sizeWarning.classList.add('hidden');
+            btnZalo3D.classList.add('hidden'); sizeWarning.classList.add('hidden');
         });
 
-        // --- ĐÃ SỬA: XUẤT PDF BÁO GIÁ KHÔNG BỊ TRỐNG ---
-        btnPdf3D.addEventListener('click', () => {
-            const matOpt = materialSelect.options[materialSelect.selectedIndex];
-            const date = new Date().toLocaleDateString('vi-VN');
-            
-            const pdfHTML = `
-                <div style="padding: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: white; width: 800px;">
-                    <div style="border-bottom: 2px solid #D4AF37; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end;">
-                        <div>
-                            <h1 style="margin: 0; color: #0f172a; font-size: 28px; font-weight: 900;">GIAHAOONE</h1>
-                            <p style="margin: 5px 0 0 0; color: #D4AF37; font-size: 12px; letter-spacing: 2px;">3D PRINTING SERVICE</p>
-                        </div>
-                        <div style="text-align: right; color: #64748b; font-size: 12px;">Ngày: ${date}<br>SĐT: 0704141237</div>
-                    </div>
-                    <h2 style="text-align: center; color: #0f172a; margin-bottom: 30px;">BÁO GIÁ DỊCH VỤ IN 3D</h2>
-                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 40px; text-align: left;">
-                        <tr style="background: #f8fafc;"><td style="padding: 12px; border: 1px solid #e2e8f0; width: 40%;"><strong>Vật liệu in:</strong></td><td style="padding: 12px; border: 1px solid #e2e8f0;">${matOpt.text.split(' - ')[0]}</td></tr>
-                        <tr><td style="padding: 12px; border: 1px solid #e2e8f0;"><strong>Màu sắc bề mặt:</strong></td><td style="padding: 12px; border: 1px solid #e2e8f0;">${document.querySelector('.color-btn.border-white').getAttribute('title')}</td></tr>
-                        <tr style="background: #f8fafc;"><td style="padding: 12px; border: 1px solid #e2e8f0;"><strong>Độ đặc (Infill):</strong></td><td style="padding: 12px; border: 1px solid #e2e8f0;">${infillSlider.value}%</td></tr>
-                        <tr><td style="padding: 12px; border: 1px solid #e2e8f0;"><strong>Độ mịn lớp in:</strong></td><td style="padding: 12px; border: 1px solid #e2e8f0;">${layerHeight.options[layerHeight.selectedIndex].text.split(' (')[0]}</td></tr>
-                        <tr style="background: #f8fafc;"><td style="padding: 12px; border: 1px solid #e2e8f0;"><strong>Kích thước mẫu:</strong></td><td style="padding: 12px; border: 1px solid #e2e8f0;">${document.getElementById('dim-display').innerText}</td></tr>
-                        <tr><td style="padding: 12px; border: 1px solid #e2e8f0;"><strong>Khối lượng dự kiến:</strong></td><td style="padding: 12px; border: 1px solid #e2e8f0;">${document.getElementById('weight-display').innerText}</td></tr>
-                    </table>
-                    <div style="background: #0f172a; color: white; padding: 20px; border-radius: 8px; text-align: right;">
-                        <span style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Tổng chi phí dự kiến</span><br>
-                        <span style="font-size: 32px; font-weight: 900; color: #10b981;">${document.getElementById('price-display').innerText}</span>
-                    </div>
-                    <div style="margin-top: 50px; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 20px;">
-                        <p><strong>Lưu ý:</strong> Báo giá trên là dự toán tự động dựa trên thuật toán lưới 3D. Vui lòng gửi kèm file STL qua Zalo để kỹ sư kiểm tra dung sai, cấu trúc chịu lực trước khi tiến hành sản xuất.</p>
-                    </div>
-                </div>`;
-                
-            const tempDiv = document.createElement('div'); 
-            tempDiv.innerHTML = pdfHTML;
-            tempDiv.style.position = 'absolute';
-            tempDiv.style.left = '-9999px'; // Giấu đi nhưng vẫn nằm trong DOM để html2pdf chụp được
-            tempDiv.style.top = '0';
-            document.body.appendChild(tempDiv);
-
-            const opt = { 
-                margin: 0, 
-                filename: 'Bao_Gia_In3D_Giahaoone.pdf', 
-                image: { type: 'jpeg', quality: 0.98 }, 
-                html2canvas: { scale: 2, useCORS: true }, 
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } 
-            };
-            
-            html2pdf().set(opt).from(tempDiv).save().then(() => {
-                document.body.removeChild(tempDiv);
-            });
-        });
-
+        // --- 5. NÚT SCROLL TO TOP ---
         window.addEventListener('scroll', () => { if (window.scrollY > 400) { backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4'); } else { backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4'); } });
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
     </script>
