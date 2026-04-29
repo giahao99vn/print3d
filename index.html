@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -11,7 +10,6 @@
     <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
     <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://unpkg.com/three@0.128.0/examples/js/environments/RoomEnvironment.js"></script>
-    <!-- THÊM THƯ VIỆN XUẤT PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -162,7 +160,6 @@
         </div>
     </section>
 
-    <!-- SECTION 3D CONFIGURATOR -->
     <section id="auto-calc" class="py-24 bg-slate-950 text-white relative">
         <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 50% 50%, #D4AF37 2px, transparent 2px); background-size: 40px 40px;"></div>
         <div class="container mx-auto px-6 relative z-10">
@@ -190,13 +187,12 @@
                         </button>
                         <p id="file-error" class="hidden text-red-400 text-sm mt-4 font-medium"><i class="fa-solid fa-triangle-exclamation"></i> Dung lượng file quá lớn!</p>
                         
-                        <!-- MỚI: TÍNH NĂNG DEMO 3D MODELS -->
                         <div id="demo-models" class="mt-12 pt-6 border-t border-slate-800 w-full max-w-md text-center">
-                            <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-3"><i class="fa-solid fa-wand-magic-sparkles text-viet-gold"></i> Hoặc trải nghiệm bằng các file mẫu:</p>
+                            <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-3"><i class="fa-solid fa-wand-magic-sparkles text-viet-gold"></i> Hoặc trải nghiệm bằng file mẫu:</p>
                             <div class="flex gap-3 justify-center">
                                 <button onclick="loadDemoModel('gear')" class="px-4 py-2 bg-slate-800 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all border border-slate-700 hover:border-brand-400 shadow"><i class="fa-solid fa-gear mr-1"></i> Bánh Răng</button>
-                                <button onclick="loadDemoModel('box')" class="px-4 py-2 bg-slate-800 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all border border-slate-700 hover:border-brand-400 shadow"><i class="fa-solid fa-cube mr-1"></i> Hộp Gắn Mạch</button>
-                                <button onclick="loadDemoModel('knot')" class="px-4 py-2 bg-slate-800 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all border border-slate-700 hover:border-brand-400 shadow"><i class="fa-solid fa-dharmachakra mr-1"></i> Decor Xoắn</button>
+                                <button onclick="loadDemoModel('box')" class="px-4 py-2 bg-slate-800 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all border border-slate-700 hover:border-brand-400 shadow"><i class="fa-solid fa-cube mr-1"></i> Hộp Mạch</button>
+                                <button onclick="loadDemoModel('knot')" class="px-4 py-2 bg-slate-800 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all border border-slate-700 hover:border-brand-400 shadow"><i class="fa-solid fa-dharmachakra mr-1"></i> Trụ Xoắn</button>
                             </div>
                         </div>
                     </div>
@@ -259,7 +255,7 @@
                                 <p class="text-xs font-mono text-slate-300" id="dim-display">0 x 0 x 0 mm</p>
                             </div>
                             <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mb-1">Trọng lượng (Ước tính)</p>
+                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mb-1">Trọng lượng dự kiến</p>
                                 <p class="text-base font-mono text-viet-gold font-bold" id="weight-display">0.00 <span class="text-xs">g</span></p>
                             </div>
                         </div>
@@ -276,9 +272,8 @@
                                 <i class="fa-solid fa-paper-plane group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i> Gửi Yêu Cầu Zalo
                             </button>
                             
-                            <!-- MỚI: TÍNH NĂNG XUẤT BÁO GIÁ PDF -->
                             <button id="btn-pdf-3d" class="w-full mt-3 bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-4 rounded-xl transition-all border border-slate-600 flex items-center justify-center gap-2 hidden">
-                                <i class="fa-solid fa-file-pdf text-red-400"></i> Xuất Báo Giá (PDF)
+                                <i class="fa-solid fa-file-pdf text-red-400"></i> Tải Báo Giá (PDF)
                             </button>
                         </div>
                     </div>
@@ -287,7 +282,6 @@
         </div>
     </section>
 
-    <!-- CALCULATOR THỦ CÔNG -->
     <section id="calculator" class="py-24 bg-white/80 backdrop-blur-sm border-b border-slate-200">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto">
@@ -327,7 +321,7 @@
                                 <div id="calc-rate-info" class="mt-4 text-sm font-medium text-slate-400 italic">Úm ba la, giá hiện ra liền!</div>
                             </div>
                             <div class="pt-6 border-t border-slate-100">
-                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-3"><i class="fa-solid fa-gift text-viet-gold mr-1"></i> Ưu dãi dành cho khách hàng cũ</label>
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-3"><i class="fa-solid fa-gift text-viet-gold mr-1"></i> Ưu đãi dành cho khách hàng cũ</label>
                                 <input type="password" id="calc-password" placeholder="Mã này gồm 6 chữ cái nha!" class="w-full sm:w-64 bg-slate-50 border border-slate-200 p-3 rounded-xl outline-none focus:border-viet-gold transition text-sm">
                             </div>
                         </div>
@@ -361,7 +355,205 @@
         </div>
     </section>
 
-    <!-- SECTION FAQ -->
+    <section id="pricing" class="py-24 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-black mb-4 tracking-tight uppercase">Đặc tính Vật liệu Kỹ thuật</h2>
+                <div class="w-16 h-1 bg-brand-500 mx-auto mb-6 rounded-full"></div>
+                <p class="text-slate-500 max-w-2xl mx-auto text-sm">Thông số cơ tính đã được thực nghiệm và tối ưu hóa profile in trên máy công nghiệp của Giahaoone.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center font-black">P</div>
+                        <h4 class="font-black text-slate-900 text-lg">PETG</h4>
+                    </div>
+                    <ul class="space-y-5">
+                        <li>
+                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-500 uppercase">Độ bền cơ học</span><span class="text-blue-600">85%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-blue-500 w-[85%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-500 uppercase">Chịu nhiệt (75°C)</span><span class="text-blue-600">65%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-blue-500 w-[65%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-500 uppercase">Độ bám dính lớp</span><span class="text-blue-600">95%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-blue-500 w-[95%]"></div></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center font-black">L</div>
+                        <h4 class="font-black text-slate-900 text-lg">PLA</h4>
+                    </div>
+                    <ul class="space-y-5">
+                        <li>
+                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-500 uppercase">Độ cứng bề mặt</span><span class="text-emerald-600">90%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-emerald-500 w-[90%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-500 uppercase">Độ sắc nét chi tiết</span><span class="text-emerald-600">100%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-emerald-500 w-[100%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-500 uppercase">Chịu va đập</span><span class="text-emerald-600">50%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-emerald-500 w-[50%]"></div></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-orange-50 text-orange-600 rounded-lg flex items-center justify-center font-black">A</div>
+                        <h4 class="font-black text-slate-900 text-lg">ABS / ASA</h4>
+                    </div>
+                    <ul class="space-y-5">
+                        <li>
+                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-500 uppercase">Chịu nhiệt (>85°C)</span><span class="text-orange-600">100%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-orange-500 w-[100%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-500 uppercase">Kháng UV (ASA)</span><span class="text-orange-600">100%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-orange-500 w-[100%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-500 uppercase">Gia công sau in</span><span class="text-orange-600">95%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-orange-500 w-[95%]"></div></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-shadow relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-slate-900 text-white text-[9px] font-bold px-2 py-1 rounded-bl-lg uppercase tracking-wider">High-End</div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-slate-100 text-slate-800 rounded-lg flex items-center justify-center font-black">C</div>
+                        <h4 class="font-black text-slate-900 text-lg">Carbon Fiber</h4>
+                    </div>
+                    <ul class="space-y-5">
+                        <li>
+                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-500 uppercase">Cơ tính công nghiệp</span><span class="text-slate-800">100%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-slate-800 w-[100%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-500 uppercase">Kháng mài mòn</span><span class="text-slate-800">98%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-slate-800 w-[98%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between text-xs font-bold mb-1"><span class="text-slate-500 uppercase">Trọng lượng nhẹ</span><span class="text-slate-800">95%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-slate-800 w-[95%]"></div></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="compare" class="py-24 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-3xl md:text-4xl font-black mb-4 uppercase tracking-tight text-slate-900">Bảng so sánh chi tiết vật liệu</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Các sản phẩm đều được tinh chỉnh thông số tối ưu theo từng loại nhựa để đạt độ bền và thẩm mỹ cao nhất trên các dòng máy công nghiệp.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <h4 class="font-black text-brand-600 text-xl border-l-4 border-brand-500 pl-3 mb-8">Nhựa PETG</h4>
+                    <ul class="space-y-6">
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-600 uppercase">Độ bền va đập</span><span class="text-xs font-black text-brand-600">85%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-brand-500 w-[85%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-600 uppercase">Chịu nhiệt (75°C)</span><span class="text-xs font-black text-brand-600">65%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-brand-500 w-[65%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-600 uppercase">Độ bám dính</span><span class="text-xs font-black text-brand-600">95%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-brand-500 w-[95%]"></div></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <h4 class="font-black text-slate-900 text-xl border-l-4 border-emerald-500 pl-3 mb-8">Nhựa PLA</h4>
+                    <ul class="space-y-6">
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-600 uppercase">Độ bền va đập</span><span class="text-xs font-black text-emerald-600">50%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-emerald-500 w-[50%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-600 uppercase">Độ mịn bề mặt</span><span class="text-xs font-black text-emerald-600">100%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-emerald-500 w-[100%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-600 uppercase">Dễ in mẫu khó</span><span class="text-xs font-black text-emerald-600">95%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-emerald-500 w-[95%]"></div></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <h4 class="font-black text-slate-900 text-xl border-l-4 border-amber-500 pl-3 mb-8">ABS / ASA</h4>
+                    <ul class="space-y-6">
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-600 uppercase">Chịu nhiệt (>85°C)</span><span class="text-xs font-black text-amber-600">100%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-amber-500 w-[100%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-600 uppercase">Kháng tia UV (ASA)</span><span class="text-xs font-black text-amber-600">100%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-amber-500 w-[100%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-600 uppercase">Độ cứng vật lý</span><span class="text-xs font-black text-amber-600">90%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-amber-500 w-[90%]"></div></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-bold px-3 py-1.5 rounded-bl-xl uppercase tracking-widest shadow-lg">Kỹ Thuật Cao</div>
+                    <h4 class="font-black text-white text-xl border-l-4 border-slate-400 pl-3 mb-8 relative z-10 text-nowrap">ABS-GF / PC</h4>
+                    <ul class="space-y-6 relative z-10">
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-400 uppercase">Chịu nhiệt (>130°C)</span><span class="text-xs font-black text-white">90%</span></div>
+                            <div class="stat-bar bg-slate-800"><div class="stat-fill bg-slate-400 w-[90%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-400 uppercase">Kháng mài mòn</span><span class="text-xs font-black text-white">98%</span></div>
+                            <div class="stat-bar bg-slate-800"><div class="stat-fill bg-slate-400 w-[98%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-400 uppercase">Độ cứng vật lý</span><span class="text-xs font-black text-white">97%</span></div>
+                            <div class="stat-bar bg-slate-800"><div class="stat-fill bg-slate-400 w-[97%]"></div></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <h4 class="font-black text-slate-900 text-xl border-l-4 border-violet-500 pl-3 mb-8">Nhựa TPU (Dẻo)</h4>
+                    <ul class="space-y-6">
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-600 uppercase">Độ linh hoạt</span><span class="text-xs font-black text-violet-600">100%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-violet-500 w-[100%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-600 uppercase">Kháng mài mòn</span><span class="text-xs font-black text-violet-600">95%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-violet-500 w-[95%]"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-end mb-2"><span class="text-xs font-bold text-slate-600 uppercase">Độ bền kéo</span><span class="text-xs font-black text-violet-600">90%</span></div>
+                            <div class="stat-bar"><div class="stat-fill bg-violet-500 w-[90%]"></div></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="faq" class="py-24 bg-white border-y border-slate-200">
         <div class="container mx-auto px-6 max-w-4xl">
             <div class="text-center mb-16">
@@ -400,25 +592,84 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer id="contact" class="bg-slate-950 text-slate-300 pt-20 pb-8 border-t-[3px] border-viet-gold relative overflow-hidden">
-        <div class="container mx-auto px-6 relative z-10 text-center">
-            <h2 class="text-4xl font-black text-white tracking-tight mb-4 text-viet-gold">GIAHAOONE</h2>
-            <p class="text-sm">© 2026 GIAHAOONE PRINT 3D - KIÊN GIANG.</p>
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 50% 50%, #D4AF37 2px, transparent 2px); background-size: 30px 30px;"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 pb-16 border-b border-slate-800">
+                
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="fa-solid fa-cube text-viet-gold text-4xl drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]"></i>
+                        <h2 class="text-4xl font-black text-white tracking-tight">GIAHAOONE</h2>
+                    </div>
+                    <p class="text-slate-400 font-medium leading-relaxed mb-10 max-w-md">
+                        Đối tác tin cậy trong lĩnh vực thiết kế tối ưu hóa (DfAM) và In 3D linh kiện nguyên mẫu, cơ khí chính xác tại khu vực Đồng bằng Sông Cửu Long.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-5 group">
+                            <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-brand-500 group-hover:bg-brand-500 group-hover:text-white group-hover:border-brand-400 transition-all shadow-lg">
+                                <i class="fas fa-map-marker-alt text-lg"></i>
+                            </div>
+                            <div class="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">
+                                Ấp An Trung, xã Định An<br>huyện Gò Quao, tỉnh Kiên Giang
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-5 group">
+                            <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-viet-gold group-hover:bg-viet-gold group-hover:text-slate-900 group-hover:border-yellow-400 transition-all shadow-lg">
+                                <i class="fas fa-phone-alt text-lg"></i>
+                            </div>
+                            <a href="tel:0704141237" class="text-2xl font-black text-white hover:text-viet-gold transition-colors tracking-tight">
+                                0704141237
+                            </a>
+                        </div>
+                        
+                        <div class="flex items-center gap-5 group">
+                            <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-[#1877F2] group-hover:bg-[#1877F2] group-hover:text-white group-hover:border-blue-400 transition-all shadow-lg">
+                                <i class="fab fa-facebook-f text-lg"></i>
+                            </div>
+                            <a href="https://www.facebook.com/4ghao/" target="_blank" class="text-base font-bold text-slate-300 hover:text-white transition-colors flex items-center gap-2">
+                                facebook.com/4ghao <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-50"></i>
+                            </a>
+                        </div>
+                        <div class="flex items-center gap-5 group">
+                            <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-pink-500 group-hover:bg-pink-500 group-hover:text-white group-hover:border-pink-400 transition-all shadow-lg">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <a href="https://giahao99vn.github.io/tinnhantinhyeu/" target="_blank" class="text-zinc-400 text-sm hover:text-white transition">Một món quà nho nhỏ dành tặng bạn</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="h-[350px] lg:h-auto rounded-3xl overflow-hidden border-2 border-slate-800 shadow-2xl relative group">
+                    <div class="absolute inset-0 border-4 border-transparent group-hover:border-viet-gold/30 transition-colors rounded-3xl pointer-events-none z-10"></div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d245.74760599537726!2d105.31518973281031!3d9.76930858385655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1777133563292!5m2!1svi!2s" width="100%" height="100%" style="border:0; position: absolute; inset:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            
+            <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">
+                <p>© 2026 GIAHAOONE PRINT 3D - KIÊN GIANG.</p>
+                <div class="flex items-center gap-2 bg-slate-900 px-4 py-2 rounded-full border border-slate-800">
+                    Coded by <span class="text-viet-gold">Gia Hào</span>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- CÁC NÚT CÔNG CỤ NỔI -->
     <div class="floating-tools fixed bottom-6 right-6 z-[100] flex flex-col gap-3">
         <button id="backToTopBtn" onclick="scrollToTop()" class="w-14 h-14 bg-slate-900 border border-brand-500 text-brand-500 rounded-full shadow-[0_0_15px_rgba(14,165,233,0.3)] flex items-center justify-center text-xl hover:scale-110 transition-all duration-500 opacity-0 pointer-events-none translate-y-4">
             <i class="fa-solid fa-arrow-up"></i>
+        </button>
+        <button id="audio-btn" class="w-14 h-14 bg-white rounded-full shadow-xl text-brand-600 flex items-center justify-center text-xl hover:scale-110 transition-transform border border-slate-100">
+            <i class="fa-solid fa-music"></i>
         </button>
         <button onclick="openGame()" class="w-14 h-14 bg-viet-gold text-white rounded-full shadow-xl flex items-center justify-center text-xl hover:scale-110 transition-transform shadow-viet-gold/40">
             <i class="fa-solid fa-gamepad"></i>
         </button>
     </div>
 
-    <!-- MODAL GAME -->
     <div id="game-modal" class="fixed inset-0 z-[100] bg-slate-900/90 backdrop-blur-md hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
         <div class="bg-white p-8 rounded-3xl max-w-2xl w-full mx-4 shadow-2xl relative border-t-4 border-viet-gold overflow-hidden">
             <div class="absolute inset-0 opacity-5 trong-dong-bg"></div>
@@ -427,19 +678,37 @@
             </button>
             <div class="text-center mb-6 relative z-10">
                 <h3 class="text-2xl font-black text-slate-900">Giải Mã Trí Nhớ 🧠</h3>
-                <p class="text-slate-500 text-sm mt-2">Tìm tất cả các cặp thẻ giống nhau để nhận <strong>Mã giảm giá đặc biệt</strong>!</p>
+                <p class="text-slate-500 text-sm mt-2">Tìm tất cả các cặp thẻ giống nhau mang biểu tượng Kỹ Thuật & Văn Hóa Việt để nhận <strong>Mã giảm giá đặc biệt</strong>!</p>
             </div>
             <div id="game-board" class="grid grid-cols-4 gap-3 relative z-10"></div>
             <div id="win-message" class="hidden text-center mt-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl relative z-10">
                 <h4 class="text-emerald-600 font-black text-lg mb-1"><i class="fa-solid fa-gift"></i> Chúc mừng bạn!</h4>
-                <p class="text-slate-600 text-sm">Bạn đã mở khóa mã ưu đãi giảm thêm 5%. Hãy copy mã dưới đây:</p>
+                <p class="text-slate-600 text-sm">Bạn đã mở khóa mã ưu đãi giảm thêm 5%. Hãy copy mã dưới đây dán vào bảng tính giá nhé:</p>
                 <div class="text-2xl font-black text-slate-900 bg-white border border-slate-300 py-2 px-4 rounded-lg inline-block mt-3 shadow-inner select-all">giahao</div>
             </div>
         </div>
     </div>
      
     <script>
-        // --- LOGIC GAME TRÍ NHỚ ---
+        // --- 1. SETUP AUDIO (ĐÃ SỬA LỖI PHÁT NHẠC) ---
+        const bgMusic = document.getElementById('bgMusic');
+        const audioBtn = document.getElementById('audio-btn');
+        bgMusic.volume = 0.5;
+
+        audioBtn.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play().then(() => {
+                    audioBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+                    audioBtn.classList.add('animate-pulse', 'text-viet-gold', 'shadow-[0_0_20px_rgba(212,175,55,0.6)]');
+                }).catch(e => alert("Trình duyệt chặn phát nhạc tự động. Hãy thử lại."));
+            } else {
+                bgMusic.pause();
+                audioBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
+                audioBtn.classList.remove('animate-pulse', 'text-viet-gold', 'shadow-[0_0_20px_rgba(212,175,55,0.6)]');
+            }
+        });
+
+        // --- 2. LOGIC GAME TRÍ NHỚ ---
         const gameModal = document.getElementById('game-modal');
         const gameBoard = document.getElementById('game-board');
         const winMessage = document.getElementById('win-message');
@@ -459,8 +728,7 @@
         function shuffle() { cards.sort(() => Math.random() - 0.5); }
 
         function createBoard() {
-            gameBoard.innerHTML = '';
-            shuffle();
+            gameBoard.innerHTML = ''; shuffle();
             cards.forEach((item) => {
                 const card = document.createElement('div');
                 card.classList.add('memory-card');
@@ -480,9 +748,7 @@
             secondCard = this; checkForMatch();
         }
 
-        function checkForMatch() {
-            firstCard.dataset.name === secondCard.dataset.name ? disableCards() : unflipCards();
-        }
+        function checkForMatch() { firstCard.dataset.name === secondCard.dataset.name ? disableCards() : unflipCards(); }
 
         function disableCards() {
             firstCard.removeEventListener('click', flipCard); secondCard.removeEventListener('click', flipCard);
@@ -500,7 +766,7 @@
         function openGame() { createBoard(); gameModal.classList.remove('hidden'); setTimeout(() => gameModal.classList.remove('opacity-0'), 10); }
         function closeGame() { gameModal.classList.add('opacity-0'); setTimeout(() => gameModal.classList.add('hidden'), 300); }
 
-        // --- BẢNG TÍNH GIÁ NHANH THEO GRAM ---
+        // --- 3. BẢNG TÍNH GIÁ NHANH THEO GRAM ---
         const pricingManual = { petg: { under: 1000, over: 600 }, pla: { under: 1100, over: 700 }, abs: { under: 1200, over: 800 } };
         const MIN_PRICE = 20000;
         const CTV_PASSWORD = "giahao"; 
@@ -552,7 +818,7 @@
         setMaterialManual('petg'); 
         [weightInputManual, passwordInputManual].forEach(el => el.addEventListener('input', calculateManualPrice));
 
-        // --- HỆ THỐNG PHÂN TÍCH 3D TỰ ĐỘNG ---
+        // --- 4. HỆ THỐNG PHÂN TÍCH 3D TỰ ĐỘNG ---
         const fileInput = document.getElementById('file-input'), viewerContainer = document.getElementById('viewer-container'), placeholder = document.getElementById('placeholder'), loading = document.getElementById('loading'), materialSelect = document.getElementById('material'), resetViewerBtn = document.getElementById('reset-viewer-btn'), infillSlider = document.getElementById('infill-slider'), layerHeight = document.getElementById('layer-height'), sizeWarning = document.getElementById('size-warning'), btnZalo3D = document.getElementById('btn-zalo-3d'), btnPdf3D = document.getElementById('btn-pdf-3d');
         let currentVolumeCM3 = 0, currentMesh = null;
 
@@ -573,6 +839,7 @@
         animate();
 
         function calculateVolume(geometry) {
+            if(!geometry.attributes.position) return 0;
             let pos = geometry.attributes.position, sum = 0, p1 = new THREE.Vector3(), p2 = new THREE.Vector3(), p3 = new THREE.Vector3();
             for (let i = 0; i < pos.count / 3; i++) {
                 p1.fromBufferAttribute(pos, i * 3 + 0); p2.fromBufferAttribute(pos, i * 3 + 1); p3.fromBufferAttribute(pos, i * 3 + 2);
@@ -640,22 +907,47 @@
             reader.readAsArrayBuffer(file);
         });
 
+        // --- ĐÃ SỬA: VẼ BÁNH RĂNG CHUẨN KỸ THUẬT THAY VÌ BÁNH DONUT ---
+        function createGearGeometry() {
+            const shape = new THREE.Shape();
+            const teeth = 16;
+            const outerRadius = 25;
+            const innerRadius = 20;
+            
+            for (let i = 0; i < teeth * 2; i++) {
+                const r = i % 2 === 0 ? outerRadius : innerRadius;
+                const a = (i / (teeth * 2)) * Math.PI * 2;
+                if (i === 0) shape.moveTo(Math.cos(a) * r, Math.sin(a) * r);
+                else shape.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+            }
+            shape.closePath();
+            
+            const holePath = new THREE.Path();
+            holePath.absarc(0, 0, 8, 0, Math.PI * 2, false);
+            shape.holes.push(holePath);
+
+            const extrudeSettings = { depth: 8, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 0.5, bevelThickness: 0.5 };
+            const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+            geo.center();
+            return geo;
+        }
+
         // XỬ LÝ DEMO MODELS
         window.loadDemoModel = function(type) {
             loading.classList.remove('hidden');
             setTimeout(() => {
                 let geometry;
-                if (type === 'gear') { geometry = new THREE.TorusGeometry(30, 8, 16, 30); } 
+                if (type === 'gear') { geometry = createGearGeometry(); } 
                 else if (type === 'box') { geometry = new THREE.BoxGeometry(60, 40, 20); } 
                 else { geometry = new THREE.TorusKnotGeometry(25, 6, 100, 16); }
-                const nonIndexedGeo = geometry.toNonIndexed();
-                setup3DModel(nonIndexedGeo);
+                
+                setup3DModel(geometry);
             }, 500);
         };
 
         function setup3DModel(geometry) {
             currentVolumeCM3 = calculateVolume(geometry) / 1000;
-            if(currentVolumeCM3 === 0) currentVolumeCM3 = 25; // fallback
+            if(currentVolumeCM3 === 0) currentVolumeCM3 = 25; // fallback for non-indexed custom geo
             
             geometry.computeBoundingBox(); 
             const box = geometry.boundingBox;
@@ -696,15 +988,18 @@
             btnZalo3D.classList.add('hidden'); btnPdf3D.classList.add('hidden'); sizeWarning.classList.add('hidden');
         });
 
-        // XUẤT PDF BÁO GIÁ
+        // --- ĐÃ SỬA: XUẤT PDF BÁO GIÁ KHÔNG BỊ TRỐNG ---
         btnPdf3D.addEventListener('click', () => {
             const matOpt = materialSelect.options[materialSelect.selectedIndex];
             const date = new Date().toLocaleDateString('vi-VN');
             
             const pdfHTML = `
-                <div style="padding: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333;">
+                <div style="padding: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: white; width: 800px;">
                     <div style="border-bottom: 2px solid #D4AF37; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end;">
-                        <div><h1 style="margin: 0; color: #0f172a; font-size: 28px; font-weight: 900;">GIAHAOONE</h1><p style="margin: 5px 0 0 0; color: #D4AF37; font-size: 12px; letter-spacing: 2px;">3D PRINTING SERVICE</p></div>
+                        <div>
+                            <h1 style="margin: 0; color: #0f172a; font-size: 28px; font-weight: 900;">GIAHAOONE</h1>
+                            <p style="margin: 5px 0 0 0; color: #D4AF37; font-size: 12px; letter-spacing: 2px;">3D PRINTING SERVICE</p>
+                        </div>
                         <div style="text-align: right; color: #64748b; font-size: 12px;">Ngày: ${date}<br>SĐT: 0704141237</div>
                     </div>
                     <h2 style="text-align: center; color: #0f172a; margin-bottom: 30px;">BÁO GIÁ DỊCH VỤ IN 3D</h2>
@@ -724,9 +1019,25 @@
                         <p><strong>Lưu ý:</strong> Báo giá trên là dự toán tự động dựa trên thuật toán lưới 3D. Vui lòng gửi kèm file STL qua Zalo để kỹ sư kiểm tra dung sai, cấu trúc chịu lực trước khi tiến hành sản xuất.</p>
                     </div>
                 </div>`;
-            const opt = { margin: 0, filename: 'Bao_Gia_In3D_Giahaoone.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } };
-            const tempDiv = document.createElement('div'); tempDiv.innerHTML = pdfHTML;
-            html2pdf().set(opt).from(tempDiv).save();
+                
+            const tempDiv = document.createElement('div'); 
+            tempDiv.innerHTML = pdfHTML;
+            tempDiv.style.position = 'absolute';
+            tempDiv.style.left = '-9999px'; // Giấu đi nhưng vẫn nằm trong DOM để html2pdf chụp được
+            tempDiv.style.top = '0';
+            document.body.appendChild(tempDiv);
+
+            const opt = { 
+                margin: 0, 
+                filename: 'Bao_Gia_In3D_Giahaoone.pdf', 
+                image: { type: 'jpeg', quality: 0.98 }, 
+                html2canvas: { scale: 2, useCORS: true }, 
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } 
+            };
+            
+            html2pdf().set(opt).from(tempDiv).save().then(() => {
+                document.body.removeChild(tempDiv);
+            });
         });
 
         window.addEventListener('scroll', () => { if (window.scrollY > 400) { backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4'); } else { backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4'); } });
@@ -734,5 +1045,3 @@
     </script>
 </body>
 </html>
-Giahaoone_SuperPro.html
-Đang hiển thị Giahaoone_SuperPro.html.
