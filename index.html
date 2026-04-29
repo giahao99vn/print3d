@@ -800,9 +800,9 @@
             let subtotal = weight * rate;
             let discount = 0;
             
-            // Khôi phục logic % chiết khấu gốc (15% - 10% - 5%)
-            if (subtotal > 1500000) discount = subtotal * 0.15;
-            else if (subtotal > 1000000) discount = subtotal * 0.10;
+            // Khôi phục logic % chiết khấu gốc (10% - 8% - 5%)
+            if (subtotal > 1500000) discount = subtotal * 0.1;
+            else if (subtotal > 1000000) discount = subtotal * 0.08;
             else if (subtotal > 500000) discount = subtotal * 0.05;
 
             let finalTotal = subtotal - discount;
