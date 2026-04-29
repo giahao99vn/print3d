@@ -1168,17 +1168,26 @@
                 });
             });
 
-            // Animation chuyển động quay ăn khớp
+            // Animation chuyển động quay ăn khớp (Chuẩn động học)
             function animateExploded() {
                 requestAnimationFrame(animateExploded);
                 exControls.update();
                 exRenderer.render(exScene, exCamera);
                 
-                // Khi cụm đang lắp ghép (chưa nổ), cho các bánh răng chạy để phô diễn
-                if(exSlider.value < 5) {
-                    sunGear.rotation.z += 0.02;
-                    planets.forEach(p => p.rotation.z -= 0.02); // Bánh răng hành tinh quay ngược chiều
-                    shaft.rotation.z += 0.02;
+                // Khi cụm đang lắp ghép (chưa kéo slider nổ), cho các bánh răng chạy
+                if (exSlider.value < 5) {
+                    const speed = 0.03; // Tốc độ quay trục chính
+                    
+                    // Trục và Bánh răng mặt trời (Input)
+                    sunGear.rotation.z += speed;
+                    shaft.rotation.z += speed; 
+                    
+                    // Bánh răng hành tinh quay quanh trục của chính nó (Ngược chiều Sun)
+                    planets.forEach(p => p.rotation.z -= speed); 
+                    
+                    // Vành răng ngoài quay (Output). 
+                    // Tỷ số truyền Sun/Ring = 12/36 = 1/3, quay cùng chiều Planet
+                    ringGear.rotation.z -= (speed / 3); 
                 }
             }
             animateExploded();
