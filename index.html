@@ -46,7 +46,7 @@
         .glass-header {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3); /* Viền vàng đồng */
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         .btn-brand {
@@ -64,27 +64,16 @@
         .nav-link { position: relative; font-weight: 600; color: #475569; transition: color 0.2s; }
         .nav-link:hover { color: #D4AF37; }
 
-        /* Game Thẻ bài CSS */
-        .memory-card {
-            width: 100%; aspect-ratio: 1; position: relative; transform-style: preserve-3d;
-            transition: transform 0.5s; cursor: pointer;
-        }
+        .memory-card { width: 100%; aspect-ratio: 1; position: relative; transform-style: preserve-3d; transition: transform 0.5s; cursor: pointer; }
         .memory-card.flip { transform: rotateY(180deg); }
-        .front-face, .back-face {
-            width: 100%; height: 100%; position: absolute; border-radius: 12px;
-            backface-visibility: hidden; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; text-align: center; padding: 8px;
-        }
+        .front-face, .back-face { width: 100%; height: 100%; position: absolute; border-radius: 12px; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 8px; }
         .front-face { background: linear-gradient(135deg, #0ea5e9, #082f49); color: white; font-size: 2rem; }
         .back-face { background: white; border: 2px solid #0ea5e9; transform: rotateY(180deg); }
         
-        /* Floating Audio & Game Buttons */
         .floating-tools { position: fixed; bottom: 24px; right: 24px; z-index: 100; display: flex; flex-direction: column; gap: 12px; }
-        
         .stat-bar { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; }
         .stat-fill { height: 100%; border-radius: 3px; }
 
-        /* Custom slider */
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: #D4AF37; cursor: pointer; margin-top: -6px; box-shadow: 0 0 10px rgba(212,175,55,0.5); }
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #334155; border-radius: 2px; }
     </style>
@@ -181,13 +170,10 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-7xl mx-auto">
                 <div class="lg:col-span-8 relative bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl h-[650px] overflow-hidden group">
-                    
                     <button id="reset-viewer-btn" class="hidden absolute top-4 right-4 z-30 bg-slate-800/80 hover:bg-brand-500 text-white px-4 py-2 rounded-xl backdrop-blur transition shadow-lg border border-slate-700 items-center gap-2">
                         <i class="fa-solid fa-folder-open"></i> <span class="text-sm font-bold">Chọn file mới</span>
                     </button>
-
                     <div id="viewer-container" class="absolute inset-0 z-0 cursor-move"></div>
-                    
                     <div id="placeholder" class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-slate-900/95 backdrop-blur-sm transition-opacity duration-300">
                         <div class="w-20 h-20 bg-slate-800 border border-viet-gold/30 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-cloud-arrow-up text-3xl text-viet-gold"></i>
@@ -286,60 +272,67 @@
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-16">
                     <span class="text-viet-gold font-bold tracking-wider uppercase text-sm mb-2 block">Ước tính dự án</span>
-                    <h2 class="text-3xl md:text-4xl font-black mb-4 tracking-tight">Tính Giá Nhanh Theo Gram</h2>
-                    <p class="text-slate-500">Dành cho trường hợp bạn đã có sẵn thông số trọng lượng từ phần mềm Slicer.</p>
+                    <h2 class="text-3xl md:text-4xl font-black mb-4 tracking-tight">Ước tính chi phí nhanh</h2>
+                    <p class="text-slate-500">Bảng báo giá tự động dựa trên khối lượng file 3D của bạn.</p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
                     <div class="lg:col-span-7 p-8 md:p-12">
                         <div class="space-y-10">
                             <div>
-                                <label class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 block">1. Lựa chọn vật liệu</label>
+                                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 block italic">1. Lựa chọn vật liệu</h3>
                                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                    <button onclick="setMaterialManual('petg')" id="btn-petg" class="mat-btn active-material p-4 rounded-xl border border-slate-200 text-left transition-colors">
-                                        <div class="font-bold text-slate-900 mb-1">PETG</div>
+                                    <button onclick="setMaterialManual('petg')" id="btn-petg" class="mat-btn active-material bg-brand-50/50 p-5 rounded-xl border border-brand-500 text-left transition-all hover:shadow-md">
+                                        <div class="font-bold text-slate-900">PETG</div>
+                                        <div class="text-[10px] text-slate-500 mt-1 uppercase">Đa dụng & Bền hơn PLA</div>
                                     </button>
-                                    <button onclick="setMaterialManual('pla')" id="btn-pla" class="mat-btn p-4 rounded-xl border border-slate-200 text-left transition-colors">
-                                        <div class="font-bold text-slate-900 mb-1">PLA</div>
+                                    <button onclick="setMaterialManual('pla')" id="btn-pla" class="mat-btn p-5 rounded-xl border border-slate-200 text-left transition-all hover:shadow-md">
+                                        <div class="font-bold text-slate-900">PLA</div>
+                                        <div class="text-[10px] text-slate-500 mt-1 uppercase">Tính thẩm mỹ cao và có thể sơn phủ rất dễ</div>
                                     </button>
-                                    <button onclick="setMaterialManual('abs')" id="btn-abs" class="mat-btn p-4 rounded-xl border border-slate-200 text-left transition-colors">
-                                        <div class="font-bold text-slate-900 mb-1">ABS/ASA</div>
+                                    <button onclick="setMaterialManual('abs')" id="btn-abs" class="mat-btn p-5 rounded-xl border border-slate-200 text-left transition-all hover:shadow-md">
+                                        <div class="font-bold text-slate-900">ABS/ASA</div>
+                                        <div class="text-[10px] text-slate-500 mt-1 uppercase">Vật liệu Kỹ Thuật với cơ tính tốt</div>
                                     </button>
                                 </div>
                                 <input type="hidden" id="calc-material" value="petg">
                             </div>
                             <div>
-                                <label class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 block">2. Khối lượng dự kiến</label>
-                                <div class="flex items-center bg-slate-50 border border-slate-200 rounded-xl p-2 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-100 transition-all">
+                                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 block italic">2. Khối lượng dự kiến</h3>
+                                <div class="flex items-center bg-slate-50 border border-slate-200 rounded-2xl p-2 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-100 transition-all">
                                     <input type="number" id="calc-weight" placeholder="0" class="flex-1 bg-transparent border-none p-4 text-3xl font-black outline-none text-slate-900 w-full">
-                                    <span class="px-6 text-lg font-bold text-slate-400 border-l border-slate-200">Gram</span>
+                                    <span class="px-6 text-xl font-bold text-slate-400 border-l border-slate-200">Gram</span>
                                 </div>
-                                <div id="calc-rate-info" class="mt-3 text-sm font-medium text-brand-600">Đơn giá tự động điều chỉnh theo số lượng</div>
+                                <div id="calc-rate-info" class="mt-4 text-sm font-medium text-slate-400 italic">Úm ba la, giá hiện ra liền!</div>
                             </div>
                             <div class="pt-6 border-t border-slate-100">
-                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2"><i class="fa-solid fa-gift text-viet-gold"></i> Mã Khách hàng thân thiết</label>
-                                <input type="text" id="calc-password" placeholder="Nhập mã ưu đãi..." class="w-full sm:w-64 bg-slate-50 border border-slate-200 p-3 rounded-lg outline-none focus:border-viet-gold transition text-sm">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-3"><i class="fa-solid fa-gift text-viet-gold mr-1"></i> Ưu dãi dành cho khách hàng cũ</label>
+                                <input type="password" id="calc-password" placeholder="Mã này gồm 6 chữ cái nha!" class="w-full sm:w-64 bg-slate-50 border border-slate-200 p-3 rounded-xl outline-none focus:border-viet-gold transition text-sm">
                             </div>
                         </div>
                     </div>
 
                     <div class="lg:col-span-5 bg-slate-900 p-8 md:p-12 text-white flex flex-col justify-between relative overflow-hidden">
-                        <div class="absolute -right-10 -top-10 opacity-10"><i class="fa-solid fa-receipt text-9xl"></i></div>
+                        <div class="absolute -right-10 -top-10 opacity-10"><i class="fa-solid fa-calculator text-9xl"></i></div>
                         <div class="relative z-10">
-                            <h3 class="text-sm font-bold uppercase tracking-widest text-viet-gold mb-8 border-b border-slate-800 pb-4">Tạm tính hóa đơn</h3>
-                            <div class="space-y-4 text-sm font-medium">
-                                <div class="flex justify-between"><span class="text-slate-400">Chi phí nhựa in</span><span id="res-subtotal">0đ</span></div>
-                                <div class="flex justify-between"><span class="text-slate-400">Chiết khấu SL lớn</span><span id="res-discount" class="text-emerald-400">-0đ</span></div>
-                                <div id="ctv-row" class="hidden flex justify-between bg-viet-gold/20 p-3 rounded-lg border border-viet-gold/50 mt-4">
-                                    <span class="text-viet-gold">Ưu đãi Mã Bí Mật (-5%)</span><span id="res-ctv" class="font-bold text-white">0đ</span>
+                            <h3 class="text-lg font-bold mb-8 flex items-center gap-2 border-b border-slate-800 pb-4 text-viet-gold">
+                                <i class="fas fa-calculator"></i> Chi tiết báo giá
+                            </h3>
+                            <div class="space-y-6 text-sm font-medium">
+                                <div class="flex justify-between border-b border-slate-800 pb-4"><span class="text-slate-400">Tạm tính (Nhựa)</span><span id="res-subtotal" class="font-bold text-lg">0đ</span></div>
+                                <div class="flex justify-between border-b border-slate-800 pb-4"><span class="text-slate-400">Ưu đãi giảm giá với đơn hàng từ 500k</span><span id="res-discount" class="font-bold text-lg text-emerald-400">-0đ</span></div>
+                                <div id="ctv-row" class="hidden flex justify-between bg-viet-gold/20 p-4 rounded-xl border border-viet-gold/50 mt-4">
+                                    <span class="text-viet-gold font-bold">Giá dành cho khách hàng cũ (-5%)</span><span id="res-ctv" class="font-black text-xl text-white">0đ</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-12 relative z-10">
-                            <div id="min-price-warning" class="hidden mb-4 py-2 px-4 bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[11px] font-bold uppercase rounded-lg">Giá in tối thiểu mỗi đơn: 20.000đ</div>
-                            <div class="text-[10px] uppercase tracking-widest text-slate-500 mb-2">Tổng cộng</div>
-                            <div id="res-total" class="text-5xl font-black mb-8 text-white tracking-tight">0đ</div>
-                            <a href="https://zalo.me/0704141237" class="btn-brand block w-full py-4 rounded-xl font-bold text-center uppercase tracking-wider text-sm">Đặt in qua Zalo</a>
+                        <div class="mt-12 relative z-10 text-center">
+                            <div id="min-price-warning" class="hidden mb-4 py-1.5 px-4 bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[10px] font-black uppercase rounded-full inline-block">
+                                <i class="fas fa-exclamation-triangle mr-1"></i> Giá in tối thiểu: 20.000đ
+                            </div>
+                            <div class="text-[10px] uppercase tracking-[0.2em] text-slate-400 mb-2">Thanh toán dự kiến</div>
+                            <div id="res-total" class="text-5xl md:text-6xl font-black mb-10 text-white tracking-tight leading-none">0đ</div>
+                            <a href="https://zalo.me/0704141237" class="btn-brand block w-full py-5 rounded-2xl font-extrabold text-center uppercase tracking-widest text-lg shadow-lg">Gửi file in ngay</a>
                         </div>
                     </div>
                 </div>
@@ -747,21 +740,32 @@
         function openGame() { createBoard(); gameModal.classList.remove('hidden'); setTimeout(() => gameModal.classList.remove('opacity-0'), 10); }
         function closeGame() { gameModal.classList.add('opacity-0'); setTimeout(() => gameModal.classList.add('hidden'), 300); }
 
-        // --- 3. BẢNG TÍNH GIÁ NHANH THEO GRAM (MANUAL CALCULATOR) ---
-        const pricingManual = { petg: { under: 1000, over: 600 }, pla: { under: 1100, over: 700 }, abs: { under: 1200, over: 800 } };
+        // --- 3. BẢNG TÍNH GIÁ NHANH THEO GRAM (MANUAL CALCULATOR) CỦA BẢN GỐC ---
+        const pricingManual = { 
+            petg: { under: 1000, over: 600 }, 
+            pla: { under: 1100, over: 700 }, 
+            abs: { under: 1200, over: 800 } 
+        };
         const MIN_PRICE = 20000;
-        const CTV_PASSWORD = "GIAHAO-3D";
+        const CTV_PASSWORD = "giahao"; // Đã khôi phục mật khẩu gốc
 
         const materialInputManual = document.getElementById('calc-material');
         const weightInputManual = document.getElementById('calc-weight');
         const passwordInputManual = document.getElementById('calc-password');
+        const rateInfoManual = document.getElementById('calc-rate-info');
         
+        const resSubtotal = document.getElementById('res-subtotal');
+        const resDiscount = document.getElementById('res-discount');
+        const resTotal = document.getElementById('res-total');
+        const ctvRow = document.getElementById('ctv-row');
+        const resCtv = document.getElementById('res-ctv');
+        const minPriceWarning = document.getElementById('min-price-warning');
+
         function setMaterialManual(mat) {
             materialInputManual.value = mat;
-            // Xóa class active của TẤT CẢ các nút vật liệu thủ công
-            document.querySelectorAll('.mat-btn').forEach(btn => btn.classList.remove('active-material', 'border-brand-500'));
-            // Thêm class active cho nút vừa click
-            document.getElementById('btn-' + mat).classList.add('active-material', 'border-brand-500');
+            document.querySelectorAll('.mat-btn').forEach(btn => btn.classList.remove('active-material', 'border-brand-500', 'bg-brand-50/50'));
+            const activeBtn = document.getElementById('btn-' + mat);
+            activeBtn.classList.add('active-material', 'border-brand-500', 'bg-brand-50/50');
             calculateManualPrice();
         }
 
@@ -770,32 +774,44 @@
         function calculateManualPrice() {
             const mat = materialInputManual.value;
             const weight = parseFloat(weightInputManual.value) || 0;
-            const pass = passwordInputManual.value.toUpperCase();
+            const pass = passwordInputManual.value; // Phân biệt chữ hoa/chữ thường như bản gốc
             
-            const resSubtotal = document.getElementById('res-subtotal');
-            const resDiscount = document.getElementById('res-discount');
-            const resTotal = document.getElementById('res-total');
-            const ctvRow = document.getElementById('ctv-row');
-            const resCtv = document.getElementById('res-ctv');
-
             if (weight <= 0) { 
+                rateInfoManual.innerText = "Úm ba la, giá hiện ra liền!"; 
+                rateInfoManual.className = "mt-4 text-sm font-medium text-slate-400 italic";
                 resSubtotal.innerText = '0đ'; 
                 resDiscount.innerText = '-0đ'; 
                 resTotal.innerText = '0đ'; 
                 ctvRow.classList.add('hidden'); 
+                minPriceWarning.classList.add('hidden');
                 return; 
             }
 
             let rate = weight >= 400 ? pricingManual[mat].over : pricingManual[mat].under;
+            
+            if (weight >= 400) {
+                rateInfoManual.innerText = `Ưu đãi in số lượng lớn: Đơn giá ${rate}đ/g`;
+                rateInfoManual.className = "mt-4 text-sm font-black text-brand-600";
+            } else {
+                rateInfoManual.innerText = `Mức giá chuẩn: Đơn giá ${rate}đ/g`;
+                rateInfoManual.className = "mt-4 text-sm font-bold text-slate-600";
+            }
+
             let subtotal = weight * rate;
             let discount = 0;
             
-            if (subtotal > 1500000) discount = subtotal * 0.1;
-            else if (subtotal > 1000000) discount = subtotal * 0.08;
+            // Khôi phục logic % chiết khấu gốc (15% - 10% - 5%)
+            if (subtotal > 1500000) discount = subtotal * 0.15;
+            else if (subtotal > 1000000) discount = subtotal * 0.10;
             else if (subtotal > 500000) discount = subtotal * 0.05;
 
             let finalTotal = subtotal - discount;
-            if (finalTotal > 0 && finalTotal < MIN_PRICE) finalTotal = MIN_PRICE;
+            if (finalTotal > 0 && finalTotal < MIN_PRICE) {
+                finalTotal = MIN_PRICE;
+                minPriceWarning.classList.remove('hidden');
+            } else {
+                minPriceWarning.classList.add('hidden');
+            }
 
             resSubtotal.innerText = formatVND(subtotal);
             resDiscount.innerText = '-' + formatVND(discount);
@@ -809,7 +825,7 @@
             }
         }
 
-        setMaterialManual('petg'); // Gán mặc định
+        setMaterialManual('petg'); 
         [weightInputManual, passwordInputManual].forEach(el => el.addEventListener('input', calculateManualPrice));
 
         // --- 4. HỆ THỐNG PHÂN TÍCH 3D (BÁO GIÁ TỰ ĐỘNG) ---
@@ -826,11 +842,9 @@
 
         let currentVolumeCM3 = 0, currentMesh = null;
 
-        // Cài đặt Scene Three.js
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, viewerContainer.clientWidth / viewerContainer.clientHeight, 0.1, 1000);
         
-        // Renderer tối ưu hóa cho vật liệu chân thực (HDRI)
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(viewerContainer.clientWidth, viewerContainer.clientHeight);
         renderer.outputEncoding = THREE.sRGBEncoding;
@@ -838,11 +852,9 @@
         renderer.toneMappingExposure = 1.0;
         viewerContainer.appendChild(renderer.domElement);
         
-        // Thêm môi trường HDRI giả lập studio bằng RoomEnvironment
         const pmremGenerator = new THREE.PMREMGenerator(renderer);
         scene.environment = pmremGenerator.fromScene(new THREE.RoomEnvironment(), 0.04).texture;
         
-        // Đèn bổ trợ
         const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
         dirLight.position.set(2, 2, 2);
         scene.add(dirLight);
@@ -871,19 +883,16 @@
             const infill = parseInt(infillSlider.value);
             const layerMult = parseFloat(layerHeight.value);
             
-            // Tính toán khối lượng dựa trên độ đặc (Mô phỏng tường ngoài chiếm ~20% thể tích)
             const effectiveVolumeRatio = 0.2 + 0.8 * (infill / 100);
             const weight = currentVolumeCM3 * density * effectiveVolumeRatio;
             
             document.getElementById('weight-display').innerHTML = `${weight.toFixed(1)} <span class="text-xs">g</span>`;
             
-            // Tính giá & Min order
             let finalPrice = Math.round(weight * basePrice * layerMult);
             if(finalPrice > 0 && finalPrice < 20000) finalPrice = 20000;
             
             document.getElementById('price-display').innerText = `${finalPrice.toLocaleString('vi-VN')} đ`;
 
-            // Cập nhật nút Zalo Thông Minh
             const colorBtn = document.querySelector('.color-btn.border-white');
             const colorName = colorBtn ? colorBtn.getAttribute('title') : 'Vàng Đồng';
             const matName = opt.text.split(' - ')[0];
@@ -895,7 +904,6 @@
             btnZalo3D.onclick = () => window.open(`https://zalo.me/0704141237?text=${encodeURIComponent(zaloMessage)}`, '_blank');
         };
 
-        // Gắn sự kiện thay đổi
         materialSelect.addEventListener('change', updatePricing3D);
         layerHeight.addEventListener('change', updatePricing3D);
         infillSlider.addEventListener('input', (e) => {
@@ -903,7 +911,6 @@
             updatePricing3D();
         });
 
-        // Xử lý nút chọn màu
         const colorButtons = document.querySelectorAll('.color-btn');
         colorButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -925,7 +932,6 @@
             });
         });
 
-        // Đọc File STL
         fileInput.addEventListener('change', (e) => {
             const file = e.target.files[0]; if (!file) return;
             loading.classList.remove('hidden');
@@ -936,7 +942,6 @@
                     const geometry = new THREE.STLLoader().parse(event.target.result);
                     currentVolumeCM3 = calculateVolume(geometry) / 1000;
                     
-                    // Xử lý Bounding Box
                     geometry.computeBoundingBox(); 
                     const box = geometry.boundingBox;
                     const dimX = Math.abs(box.max.x - box.min.x);
@@ -951,7 +956,6 @@
                         sizeWarning.classList.add('hidden');
                     }
 
-                    // Khởi tạo Mesh
                     if (currentMesh) scene.remove(currentMesh);
                     const defaultColorBtn = document.querySelector('.color-btn.border-white') || colorButtons[0];
                     currentMesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ 
@@ -964,7 +968,6 @@
                     geometry.computeBoundingSphere(); 
                     camera.position.z = geometry.boundingSphere.radius * 2.5;
                     
-                    // UI Cập nhật
                     placeholder.classList.add('opacity-0', 'pointer-events-none');
                     resetViewerBtn.classList.remove('hidden'); resetViewerBtn.classList.add('flex');
                     btnZalo3D.classList.remove('hidden');
@@ -975,7 +978,6 @@
             reader.readAsArrayBuffer(file);
         });
 
-        // Reset Trình Xem
         resetViewerBtn.addEventListener('click', () => {
             if (currentMesh) { scene.remove(currentMesh); currentMesh.geometry.dispose(); currentMesh.material.dispose(); currentMesh = null; }
             currentVolumeCM3 = 0; fileInput.value = '';
