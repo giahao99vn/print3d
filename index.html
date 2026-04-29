@@ -177,7 +177,6 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-7xl mx-auto">
                 <div class="lg:col-span-8 relative bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl h-[500px] overflow-hidden group">
                     
-                    <!-- NÚT CHỌN FILE MỚI -->
                     <button id="reset-viewer-btn" class="hidden absolute top-4 right-4 z-30 bg-slate-800/80 hover:bg-brand-500 text-white px-4 py-2 rounded-xl backdrop-blur transition shadow-lg border border-slate-700 items-center gap-2">
                         <i class="fa-solid fa-folder-open"></i> <span class="text-sm font-bold">Chọn file mới</span>
                     </button>
@@ -209,12 +208,30 @@
                     </div>
                     <div class="space-y-6 flex-grow">
                         <div>
-                            <select id="material" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-white outline-none focus:border-brand-500">
+                            <select id="material" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-white outline-none focus:border-brand-500 transition-colors">
                                 <option value="1100" data-density="1.24">Nhựa PLA - 1.100đ/g</option>
                                 <option value="1000" data-density="1.27">Nhựa PETG - 1.000đ/g</option>
                                 <option value="1200" data-density="1.04">Nhựa ABS/ASA - 1.200đ/g</option>
+                                <option value="2000" data-density="1.30">Carbon Fiber (Công nghiệp) - 2.000đ/g</option>
                             </select>
                         </div>
+                        
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mb-3">Mô phỏng bề mặt in</p>
+                            <div class="flex flex-wrap gap-3" id="color-picker">
+                                <button class="color-btn w-8 h-8 rounded-full bg-[#D4AF37] border-2 border-white shadow-[0_0_10px_rgba(212,175,55,0.4)] transition-transform hover:scale-110" 
+                                        data-color="0xD4AF37" data-roughness="0.4" data-metalness="0.3" title="Vàng Đồng"></button>
+                                <button class="color-btn w-8 h-8 rounded-full bg-[#1e293b] border-2 border-transparent transition-transform hover:scale-110" 
+                                        data-color="0x1e293b" data-roughness="0.8" data-metalness="0.1" title="Carbon / Đen Nhám"></button>
+                                <button class="color-btn w-8 h-8 rounded-full bg-[#f8fafc] border-2 border-transparent transition-transform hover:scale-110" 
+                                        data-color="0xf8fafc" data-roughness="0.5" data-metalness="0.0" title="Trắng PLA"></button>
+                                <button class="color-btn w-8 h-8 rounded-full bg-[#dc2626] border-2 border-transparent transition-transform hover:scale-110" 
+                                        data-color="0xdc2626" data-roughness="0.5" data-metalness="0.1" title="Đỏ Kỹ Thuật"></button>
+                                <button class="color-btn w-8 h-8 rounded-full bg-[#0ea5e9] border-2 border-transparent transition-transform hover:scale-110" 
+                                        data-color="0x0ea5e9" data-roughness="0.2" data-metalness="0.2" title="Xanh PETG"></button>
+                            </div>
+                        </div>
+
                         <div class="grid grid-cols-2 gap-4">
                             <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
                                 <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mb-1">Kích thước bao</p>
@@ -824,6 +841,35 @@
             else { backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4'); backToTopBtn.classList.remove('opacity-100', 'translate-y-0'); }
         });
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        // --- MỚI: Xử lý đổi màu và bề mặt vật liệu 3D ---
+        const colorButtons = document.querySelectorAll('.color-btn');
+        colorButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Reset viền tất cả các nút
+                colorButtons.forEach(b => {
+                    b.classList.remove('border-white', 'shadow-[0_0_10px_rgba(255,255,255,0.3)]');
+                    b.classList.add('border-transparent');
+                });
+                
+                // Highlight nút được chọn
+                const targetBtn = e.target;
+                targetBtn.classList.remove('border-transparent');
+                targetBtn.classList.add('border-white', 'shadow-[0_0_10px_rgba(255,255,255,0.3)]');
+
+                // Áp dụng màu và đặc tính vật liệu lên Mesh
+                if (currentMesh) {
+                    const hexColor = parseInt(targetBtn.getAttribute('data-color'));
+                    const roughness = parseFloat(targetBtn.getAttribute('data-roughness'));
+                    const metalness = parseFloat(targetBtn.getAttribute('data-metalness'));
+                    
+                    currentMesh.material.color.setHex(hexColor);
+                    currentMesh.material.roughness = roughness;
+                    currentMesh.material.metalness = metalness;
+                    currentMesh.material.needsUpdate = true;
+                }
+            });
+        });
     </script>
 </body>
 </html>
