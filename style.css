@@ -1,0 +1,59 @@
+body { scroll-behavior: smooth; background-color: #f8fafc; overflow-x: hidden; }
+.trong-dong-bg { background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(14, 165, 233, 0.05)" stroke-width="2" stroke-dasharray="4 4"/><circle cx="50" cy="50" r="30" fill="none" stroke="rgba(212, 175, 55, 0.05)" stroke-width="1"/><polygon points="50,15 55,45 85,50 55,55 50,85 45,55 15,50 45,45" fill="rgba(14, 165, 233, 0.03)"/></svg>'); background-size: 150px 150px; }
+.glass-header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(212, 175, 55, 0.3); }
+.btn-brand { background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.2); }
+.btn-brand:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4); }
+.btn-gold { background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5); }
+.nav-link { position: relative; font-weight: 600; color: #475569; transition: color 0.2s; }
+.nav-link:hover { color: #D4AF37; }
+.memory-card { width: 100%; aspect-ratio: 1; position: relative; transform-style: preserve-3d; transition: transform 0.5s; cursor: pointer; }
+.memory-card.flip { transform: rotateY(180deg); }
+.front-face, .back-face { width: 100%; height: 100%; position: absolute; border-radius: 12px; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 8px; }
+.front-face { background: linear-gradient(135deg, #0ea5e9, #082f49); color: white; font-size: 2rem; }
+.back-face { background: white; border: 2px solid #0ea5e9; transform: rotateY(180deg); }
+.floating-tools { position: fixed; bottom: 24px; right: 24px; z-index: 100; display: flex; flex-direction: column; gap: 12px; }
+.stat-bar { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; }
+.stat-fill { height: 100%; border-radius: 3px; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: #D4AF37; cursor: pointer; margin-top: -6px; box-shadow: 0 0 10px rgba(212,175,55,0.5); }
+input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #334155; border-radius: 2px; }
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+/* =========================================
+   DARK MODE OVERRIDES (ĐÃ SỬA LỖI TÀNG HÌNH CHỮ)
+   ========================================= */
+body, .bg-white, .bg-slate-50, .text-slate-900, .text-slate-800, .border-slate-200 {
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+body.global-dark { background-color: #020617 !important; color: #e2e8f0 !important; }
+
+/* Nhắm mục tiêu chính xác vào các vùng nền sáng VÀ nền trong suốt (bg-white/80) */
+body.global-dark .bg-white, 
+body.global-dark .bg-slate-50,
+body.global-dark .bg-white\/80 { 
+    background-color: rgba(15, 23, 42, 0.9) !important; 
+    border-color: #1e293b !important; 
+}
+
+/* Đổi màu chữ tối thành sáng */
+body.global-dark .text-slate-900, 
+body.global-dark .text-slate-800,
+body.global-dark .text-slate-700 { color: #f8fafc !important; }
+
+body.global-dark .text-slate-600, 
+body.global-dark .text-slate-500 { color: #94a3b8 !important; }
+
+body.global-dark .border-slate-200, 
+body.global-dark .border-slate-100 { border-color: #1e293b !important; }
+
+body.global-dark .glass-header { 
+    background: rgba(15, 23, 42, 0.85) !important; 
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15) !important; 
+}
+
+/* Giao diện nút mặt trăng xoay ngược */
+body.global-dark #theme-toggle-btn { background-color: #1e293b !important; border-color: #f59e0b !important; }
+body.global-dark #icon-moon { transform: translateY(-30px) scale(0); opacity: 0; }
+body.global-dark #icon-sun { transform: translateY(0) scale(1); opacity: 1; }
